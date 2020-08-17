@@ -1,0 +1,24 @@
+SQL>
+SQL> update EMPLOYEE SET COUNTRY='HK' WHERE EMPLOYEE_ID=1;
+
+1 row updated.
+
+SQL>
+SQL> update ORDERS set SHIP_CITY='Wuhan' WHERE ORDER_ID=301;
+
+Error starting at line : 7 in command -
+update ORDERS set SHIP_CITY='Wuhan' WHERE ORDER_ID=301
+Error report -
+ORA-00060: deadlock detected while waiting for resource
+
+SQL>
+SQL> update ORDERS set SHIP_CITY = 'Beijing' WHERE ORDER_ID=301;
+
+1 row updated.
+
+SQL> update EMPLOYEE SET COUNTRY='USA' WHERE EMPLOYEE_ID=1;
+
+Error starting at line : 7 in command -
+update EMPLOYEE SET COUNTRY='USA' WHERE EMPLOYEE_ID=1
+Error report -
+ORA-01013: user requested cancel of current operation

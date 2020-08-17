@@ -1,0 +1,58 @@
+> db.orders.aggregate([{ $match: { "SUPPLIER.company name": "Gai paturage" } },{ $project: { _id: 0, products1: "$SUPPLIER.supplies.PRODUCT.product name" } },]).pretty();
+{ "products1" : [ "Raclette Courdavault", "Camembert Pierrot" ] }
+
+> db.orders.aggregate([{ $unwind: "$SUPPLIER.supplies" },{ $match: { "SUPPLIER.company name": "Gai paturage" } },{ $project: { _id: 0, products2: { "product name": "$SUPPLIER.supplies.PRODUCT.product name" } } },]).pretty();
+{ "products2" : { "product name" : "Raclette Courdavault" } }
+{ "products2" : { "product name" : "Camembert Pierrot" } }
+
+> db.orders.aggregate([ {"$unwind":"$SUPPLIER.supplies"},{"$project":{"product":"$SUPPLIER.supplies.PRODUCT","_id":0}}, {"$count":"total number of products"} ]).pretty();
+{ "total number of products" : 78 }
+
+> db.orders.aggregate([{ $unwind: "$CUSTOMER.submits" },{ $group: { _id: "$CUSTOMER.submits.ORDER.employee id", count: { $sum: 1 } } },{ $sort: { _id: 1 } },{ $project: { "employee id": "$_id", _id: 0 }} ,{ $limit: 3 },]).pretty();
+{ "employee id" : 1 }
+{ "employee id" : 2 }
+{ "employee id" : 3 }
+
+
+> db.orders.aggregate([ {"$unwind":"$SUPPLIER"},{"$project":{"total products":{$size:"$SUPPLIER.supplies.PRODUCT"},"company name":"$SUPPLIER.company name","_id":0}}]).pretty();
+{ "total products" : 1, "company name" : "Aux joyeux ecclesiastiques" }
+{ "total products" : 3, "company name" : "Bigfoot Breweries" }
+{
+	"total products" : 2,
+	"company name" : "Cooperativa de Quesos 'Las Cabras'"
+}
+{ "total products" : 1, "company name" : "Escargots Nouveaux" }
+{ "total products" : 3, "company name" : "Exotic Liquids" }
+{ "total products" : 2, "company name" : "Forets d'erables" }
+{ "total products" : 3, "company name" : "Formaggi Fortini s.r.l." }
+{ "total products" : 3, "company name" : "G'day, Mate" }
+{ "total products" : 2, "company name" : "Gai paturage" }
+{ "total products" : 3, "company name" : "Grandma Kelly's Homestead" }
+{ "total products" : 3, "company name" : "Heli Susswaren GmbH And Co. KG" }
+{ "total products" : 3, "company name" : "Karkki Oy" }
+{ "total products" : 3, "company name" : "Leka Trading" }
+{ "total products" : 2, "company name" : "Lyngbysild" }
+{ "total products" : 2, "company name" : "Ma Maison" }
+{ "total products" : 3, "company name" : "Mayumi's" }
+{ "total products" : 2, "company name" : "New England Seafood Cannery" }
+{ "total products" : 4, "company name" : "New Orleans Cajun Delights" }
+{
+	"total products" : 1,
+	"company name" : "Nord-Ost-Fisch Handelsgesellschaft mbH"
+}
+{ "total products" : 2, "company name" : "PB Knackebrod AB" }
+Type "it" for more
+> it
+{ "total products" : 2, "company name" : "Pasta Buttini s.r.l." }
+{ "total products" : 6, "company name" : "Pavlova, Ltd." }
+{
+	"total products" : 5,
+	"company name" : "Plutzer Lebensmittelgrossmarkte AG"
+}
+{ "total products" : 1, "company name" : "Refrescos Americanas LTDA" }
+{ "total products" : 4, "company name" : "Specialty Biscuits, Ltd." }
+{ "total products" : 3, "company name" : "Svensk Sjofoda AB" }
+{ "total products" : 1, "company name" : "Wrigley Company" }
+{ "total products" : 3, "company name" : "Zaanse Snoepfabriek" }
+{ "total products" : 2, "company name" : "Tokyo Traders" }
+{ "total products" : 3, "company name" : "Norske Meierier" }

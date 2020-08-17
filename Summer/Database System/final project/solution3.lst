@@ -1,0 +1,24 @@
+SQL> set feedback on
+SQL> set linesize 200
+SQL> set pagesize 500
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE INSERT_AGE(E#s EMPLOYEE.E#%TYPE)
+  2  IS employee_age EMPLOYEE.age%TYPE;
+  3  BEGIN
+  4  SELECT age
+  5  INTO employee_age
+  6  FROM EMPLOYEE
+  7  WHERE EMPLOYEE.E# = E#s;
+  8  employee_age := employee_age + 1;
+  9  UPDATE EMPLOYEE
+ 10  SET age = employee_age
+ 11  WHERE EMPLOYEE.E# = E#s;
+ 12  commit;
+ 13  end;
+ 14  /
+
+Procedure INSERT_AGE compiled
+
+SQL> 
+SQL> 
+SQL> spool off 

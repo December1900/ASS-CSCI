@@ -1,0 +1,50 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE INSERT_ORDER_DETAIL
+  2  (order_ids order_detail.order_id%TYPE,
+  3  product_names order_detail.product_name%TYPE,
+  4  unit_prices order_detail.unit_price%TYPE,
+  5  quantitys order_detail.quantity%TYPE,
+  6  discounts order_detail.discount%TYPE) IS
+  7  product_discontinued PRODUCT.DISCONTINUED%TYPE;
+  8  begin
+  9  select DISCONTINUED
+ 10  into product_discontinued
+ 11  from PRODUCT
+ 12  where PRODUCT_NAME=product_names and rownum=1;
+ 13  IF product_discontinued='N' THEN
+ 14  dbms_output.put_line('Not allowed to insert the discontinued products');
+ 15  ELSE 
+ 16  INSERT INTO ORDER_DETAIL VALUES(order_ids,product_names,unit_prices,quantitys,discounts);
+ 17  dbms_output.put_line('Successfully Insert');
+ 18  END IF;
+ 19  COMMIT;
+ 20  END INSERT_ORDER_DETAIL;
+ 21  /
+
+Procedure INSERT_ORDER_DETAIL compiled
+
+SQL> 
+SQL> EXECUTE INSERT_ORDER_DETAIL(331, 'Tourtiere', 7.45, 50,0);
+Not allowed to insert the discontinued products
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> EXECUTE INSERT_ORDER_DETAIL(350, 'Rossle Sauerkraut', 45.6, 38,0.05)
+Successfully Insert
+
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SPOOL OFF

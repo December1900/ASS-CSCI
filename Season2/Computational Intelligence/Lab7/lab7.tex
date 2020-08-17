@@ -1,0 +1,148 @@
+%=======================02-713 LaTeX template, following the 15-210 template==================
+%
+% You don't need to use LaTeX or this template, but you must turn your homework in as
+% a typeset PDF somehow.
+%
+% How to use:
+%    1. Update your information in section "A" below
+%    2. Write your answers in section "B" below. Precede answers for all 
+%       parts of a question with the command "\question{n}{desc}" where n is
+%       the question number and "desc" is a short, one-line description of 
+%       the problem. There is no need to restate the problem.
+%    3. If a question has multiple parts, precede the answer to part x with the
+%       command "\part{x}".
+%    4. If a problem asks you to design an algorithm, use the commands
+%       \algorithm, \correctness, \runtime to precede your discussion of the 
+%       description of the algorithm, its correctness, and its running time, respectively.
+%    5. You can include graphics by using the command \includegraphics{FILENAME}
+%
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{float} 
+\usepackage{subfig}
+\usepackage{pdfpages}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\headheight}{13.6pt}
+\newcommand\question[2]{\vspace{.25in}\hrule\textbf{#1: #2}\vspace{.5em}\hrule\vspace{.10in}}
+\renewcommand\part[1]{\vspace{.10in}\textbf{(#1)}}
+\newcommand\algorithm{\vspace{.10in}\textbf{Algorithm: }}
+\newcommand\ot{\vspace{.10in}\textbf{Output: }}
+\newcommand\runtime{\vspace{.10in}\textbf{Running time: }}
+\pagestyle{fancyplain}
+\lhead{\textbf{\NAME\ (\ANDREWID)}}
+\chead{\textbf{Lab\HWNUM}}
+\rhead{\today}
+\begin{document}\raggedright
+%Section A==============Change the values below to match your information==================
+\newcommand\NAME{Yao Xiao}  % your name
+\newcommand\ANDREWID{2019180015}     % your andrew id
+\newcommand\HWNUM{7}              % the homework number
+%Section B==============Put your answers to the questions below here=======================
+
+% no need to restate the problem --- the graders know which problem is which,
+% but replacing "The First Problem" with a short phrase will help you remember
+% which problem this is when you read over your homeworks to study.
+
+\question{1}{The First Problem} 
+
+\part{a} \algorithm
+\begin{lstlisting}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix
+from sklearn.tree import DecisionTreeClassifier
+
+car = pd.read_csv('car.csv', header=None)
+car.columns = ['buying','maint','doors','persons','lug_boot','safety','evaluation']
+car.describe()
+
+x = car.iloc[:, :-1]
+y = car.iloc[:, 6]
+x.columns = ['buying','maint','doors','persons','lug_boot','safety']
+y.columns = ['evaluation']
+x.head()
+
+x = pd.get_dummies(x, prefix_sep='_')
+x = x.values
+y = y.values
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
+
+# Logistic regression
+clf = LogisticRegression(random_state=0)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+
+# Linear SVC
+clf = SVC(kernel='linear', random_state=0)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+
+print('==========optimize==========\n')
+clf = SVC(C=1.21, kernel='linear', random_state=0, tol=0.008)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+
+# Rbf SVC
+clf = SVC(kernel = 'rbf', random_state = 0)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+
+print('==========optimize==========\n')
+
+clf = SVC(C=1.21, kernel = 'rbf', random_state = 0, tol=0.99)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+
+# DT
+clf = DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
+clf.fit(x_train, y_train)
+y_pred = clf.predict(x_test)
+print("Training Acc: ",clf.score(x_train, y_train))
+print("Testing Acc: ", clf.score(x_test, y_test))
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+\end{lstlisting}
+
+
+\part{b} \ot
+
+\includepdf[pages={1,2,3,4,5}]{lab.pdf}
+
+
+\end{document}

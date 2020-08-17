@@ -1,0 +1,189 @@
+> db.createCollection("company", {
+...   validator: {
+...     $jsonSchema: {
+...       bsonType: "object",
+...       properties: {
+...         Employees: {
+...           bsonType: "array",
+...           items: {
+...             bsonType: "object",
+...             required: ["ENumber", "Name", "DOB","DName"],
+...             properties: {
+...               ENumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               Name: {
+...                 bsonType: "string",
+...                 description: "required a string!",
+...               },
+...               DOB: {
+...                 bsonType: "date",
+...                 description: "required type of date!",
+...               },
+...               SupervisorNumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               DNumber: {
+...                 bsonType: "string",
+...                 description: "required be positive integer!",
+...               },
+...             },
+...           },
+...         },
+...         Locations: {
+...           bsonType: "array",
+...           items: {
+...             bsonType: "object",
+...             required: ["ANumber", "Address"],
+...             properties: {
+...               ANumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               Address: {
+...                 bsonType: "string",
+...                 description: "required a string!",
+...               },
+...             },
+...           },
+...         },
+...         Departments: {
+...           bsonType: "array",
+...           items: {
+...             bsonType: "object",
+...             required: ["DNumber", "DName", "MNumber", "MSdate", "Addresses"],
+...             properties: {
+...               DNumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               DName: {
+...                 bsonType: "string",
+...                 description: "required a string!",
+...               },
+...               ManagerNumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               MSdate: {
+...                 bsonType: "date",
+...                 description: "required type of date!",
+...               },
+...               Addresses: {
+...                 bsonType: "array",
+...                 items: {
+...                   bsonType: "string",
+...                   description: "required be positive integer!",
+...                 },
+...               },
+...             },
+...           },
+...         },
+...         Managers: {
+...           bsonType: "array",
+...           items: {
+...             bsonType: "object",
+...             required: ["MNumber", "Name"],
+...             properties: {
+...               MNumber: {
+...                 bsonType: "int",
+...                 minimum: 0,
+...                 description: "required be positive integer!",
+...               },
+...               Name: {
+...                 bsonType: "string",
+...                 description: "required a string!",
+...               },
+...             },
+...           },
+...         },
+...       },
+...     },
+...   },
+... });
+{ "ok" : 1 }
+
+> db.company.insert({
+...   Employees: [
+...     {
+...       ENumber: NumberInt(1),
+...       Name: "James",
+...       DOB: new Date("2000-01-01"),
+...       DName: "Marketing",
+...     },
+...     {
+...       ENumber: NumberInt(2),
+...       Name: "West",
+...       DOB: new Date("1999-12-01"),
+...       SupervisorNumber: NumberInt(1),
+...       DName: "Marketing",
+...     },
+...   ],
+... });
+WriteResult({ "nInserted" : 1 })
+> db.company.insert({
+...   Locations: [
+...     {
+...       ANumber: NumberInt(1),
+...       Address: "Queen Avenue",
+...     },
+...     {
+...       ANumber: NumberInt(2),
+...       Address: "Huntington Avenue",
+...     },
+...   ],
+... });
+WriteResult({ "nInserted" : 1 })
+> db.company.insert({
+...   Departments: [
+...     {
+...       DNumber: NumberInt(1),
+...       DName: "Marketing",
+...       MNumber: NumberInt(001),
+...       MSdate: new Date("1998-08-08"),
+...       Addresses: ["Queen Avenue","Huntington Avenue"],
+...     },
+...   ],
+... });
+WriteResult({ "nInserted" : 1 })
+> db.company.insert({
+...   Managers: [
+...     {
+...       MNumber: NumberInt(001),
+...       Name: "Jelly",
+...     },
+...     {
+...       MNumber: NumberInt(002),
+...       Name: "Paul",
+...     },
+...   ],
+... });
+WriteResult({ "nInserted" : 1 })
+
+> db.company.insert({
+...   Departments: [
+...     {
+...       DNumber: NumberInt(2),
+...       DName: "Advertising",
+...       MNumber: NumberInt(002),
+...       MSdate: "1998-08-08",
+...       Addresses: ["Leaf Avenue","Ice Avenue"],
+...     },
+...   ],
+... });
+WriteResult({
+	"nInserted" : 0,
+	"writeError" : {
+		"code" : 121,
+		"errmsg" : "Document failed validation"
+	}
+})
+
+The reason why document failed validation is beacuse for MSdate, it requires a type of date instead of string.

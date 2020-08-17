@@ -1,0 +1,49 @@
+SPOOL \Users\december\Desktop\assignment2\solution3
+SET ECHO ON
+SET FEEDBACK ON
+SET LINESIZE 100
+SET PAGESIZE 200
+SET SERVEROUTPUT ON
+
+ALTER TABLE PRODUCT ADD  ORDERS_TOTAL_NUMBER NUMBER(10);
+
+UPDATE PRODUCT 
+SET ORDERS_TOTAL_NUMBER =
+(SELECT DISTINCT COUNT(1) FROM ORDER_DETAIL
+WHERE product.product_name=order_detail.product_name 
+GROUP BY product_name);
+
+CREATE OR REPLACE TRIGGER ORDER_LOG
+AFTER UPDATE OR DELETE OR INSERT ON ORDER_DETAIL
+BEGIN
+IF DELETING THEN
+UPDATE PRODUCT 
+SET ORDERS_TOTAL_NUMBER=
+(SELECT DISTINCT COUNT(1) FROM ORDER_DETAIL
+WHERE product.product_name=order_detail.product_name GROUP BY product_name);
+dbms_output.put_line('Order total numbers has deleted');
+ELSIF UPDATING THEN
+UPDATE PRODUCT 
+SET ORDERS_TOTAL_NUMBER=
+(SELECT DISTINCT COUNT(1) FROM ORDER_DETAIL
+WHERE product.product_name=order_detail.product_name GROUP BY product_name);
+dbms_output.put_line('Order total numbers has updated');
+ELSIF INSERTING THEN
+UPDATE PRODUCT 
+SET ORDERS_TOTAL_NUMBER=
+(SELECT DISTINCT COUNT(1) FROM ORDER_DETAIL
+WHERE product.product_name=order_detail.product_name GROUP BY product_name);
+dbms_output.put_line('Order total numbers has inserted');
+END IF;
+END;
+/
+
+DELETE FROM ORDER_DETAIL WHERE ORDER_ID='310' AND PRODUCT_NAME='Pavlova';
+
+UPDATE ORDER_DETAIL SET QUANTITY = 14 WHERE ORDER_ID='290' AND PRODUCT_NAME='Maxilaku';
+
+INSERT INTO ORDER_DETAIL VALUES(383, 'Gravad lax', 26, 100,0.2);
+
+
+
+SPOOL OFF

@@ -1,0 +1,99 @@
+%=======================02-713 LaTeX template, following the 15-210 template==================
+%
+% You don't need to use LaTeX or this template, but you must turn your homework in as
+% a typeset PDF somehow.
+%
+% How to use:
+%    1. Update your information in section "A" below
+%    2. Write your answers in section "B" below. Precede answers for all 
+%       parts of a question with the command "\question{n}{desc}" where n is
+%       the question number and "desc" is a short, one-line description of 
+%       the problem. There is no need to restate the problem.
+%    3. If a question has multiple parts, precede the answer to part x with the
+%       command "\part{x}".
+%    4. If a problem asks you to design an algorithm, use the commands
+%       \algorithm, \correctness, \runtime to precede your discussion of the 
+%       description of the algorithm, its correctness, and its running time, respectively.
+%    5. You can include graphics by using the command \includegraphics{FILENAME}
+%
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\headheight}{13.6pt}
+\newcommand\question[2]{\vspace{.25in}\hrule\textbf{#1: #2}\vspace{.5em}\hrule\vspace{.10in}}
+\renewcommand\part[1]{\vspace{.10in}\textbf{(#1)}}
+\newcommand\algorithm{\vspace{.10in}\textbf{Algorithm: }}
+\newcommand\correctness{\vspace{.10in}\textbf{Output: }}
+\newcommand\runtime{\vspace{.10in}\textbf{Running time: }}
+\pagestyle{fancyplain}
+\lhead{\textbf{\NAME\ (\ANDREWID)}}
+\chead{\textbf{Lab\HWNUM}}
+\rhead{\today}
+\begin{document}\raggedright
+%Section A==============Change the values below to match your information==================
+\newcommand\NAME{Yao Xiao}  % your name
+\newcommand\ANDREWID{2019180015}     % your andrew id
+\newcommand\HWNUM{4}              % the homework number
+%Section B==============Put your answers to the questions below here=======================
+
+% no need to restate the problem --- the graders know which problem is which,
+% but replacing "The First Problem" with a short phrase will help you remember
+% which problem this is when you read over your homeworks to study.
+
+\question{1}{The First Problem} 
+
+\part{a} \algorithm
+\begin{lstlisting}
+from sklearn import datasets
+from sklearn import svm
+import numpy as np
+
+iris = datasets.load_iris()
+print(type(iris), dir(iris))
+
+x = iris.data
+y = iris.target
+
+data = x.shape[0]
+ratio = 8/2
+data_test = int(data / (1 + ratio))
+data_train = data - data_test
+index = np.arange(data)
+np.random.shuffle(index)
+
+x_test = x[index[:data_test],:] 
+y_test = y[index[:data_test]]
+x_train = x[index[data_test:],:] 
+y_train = y[index[data_test:]]
+
+svm_linear = svm.SVC(decision_function_shape="ovo", kernel="linear")
+svm_poly = svm.SVC(decision_function_shape="ovo", kernel="poly")
+svm_rbf = svm.SVC(decision_function_shape="ovo", kernel="rbf")
+
+svm_linear.fit(x_train, y_train)
+svm_poly.fit(x_train, y_train)
+svm_rbf.fit(x_train, y_train)
+pre_linear_y_test = svm_linear.predict(x_test)
+pre_poly_y_test = svm_poly.predict(x_test)
+pre_rbf_y_test = svm_rbf.predict(x_test)
+
+
+acc_linear = sum(pre_linear_y_test == y_test) / data_test
+print('The accuracy of linear kernel is: ', acc_linear)
+acc_poly = sum(pre_poly_y_test == y_test) / data_test
+print('The accuracy of poly kernel is: ', acc_poly)
+acc_rbf = sum(pre_rbf_y_test == y_test) / data_test
+print('The accuracy of rbf kernel is: ', acc_rbf)
+\end{lstlisting}
+
+\part{b} \correctness\\
+\includegraphics[scale=0.8]{ot.png}
+
+
+
+\end{document}

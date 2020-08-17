@@ -1,0 +1,73 @@
+SQL> set echo on
+SQL> set feedback on
+SQL> set linesize 200
+SQL> set pagesize 500
+SQL> 
+SQL> ALTER TABLE EMPLOYEE ADD(age VARCHAR(3));
+
+Table EMPLOYEE altered.
+
+SQL> 
+SQL> INSERT INTO EMPLOYEE VALUES('21332','Jane',TO_DATE('2000-01-26','YYYY-MM-DD'),'21332','Marketing','');
+
+1 row inserted.
+
+SQL> 
+SQL> UPDATE EMPLOYEE SET age=TO_CHAR(SYSDATE,'yyyy')-TO_CHAR(EMPLOYEE.DOB,'yyyy');
+
+3 rows updated.
+
+SQL> 
+SQL> SELECT * FROM Employee;
+
+E#    NAME                           DOB       SUPER DNAME                            AGE
+----- ------------------------------ --------- ----- -------------------------------- ---
+21332 Jane                           26-JAN-00 21332 Marketing                        20 
+21345 James                          01-JAN-00 21345 Marketing                        20 
+21445 West                           01-DEC-99 21445 Marketing                        21 
+
+3 rows selected. 
+
+SQL> 
+SQL> CREATE OR REPLACE TRIGGER EM_LOG
+  2  AFTER INSERT OR DELETE ON EMPLOYEE
+  3  BEGIN
+  4  UPDATE EMPLOYEE SET EMPLOYEE.age=TO_CHAR(SYSDATE,'yyyy')-TO_CHAR(EMPLOYEE.DOB,'yyyy');
+  5  END;
+  6  /
+
+Trigger EM_LOG compiled
+
+SQL> 
+SQL> INSERT INTO EMPLOYEE VALUES('21111','Rose',TO_DATE('1998-02-06','YYYY-MM-DD'),'21111','Marketing','');
+
+1 row inserted.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+E#    NAME                           DOB       SUPER DNAME                            AGE
+----- ------------------------------ --------- ----- -------------------------------- ---
+21332 Jane                           26-JAN-00 21332 Marketing                        20 
+21111 Rose                           06-FEB-98 21111 Marketing                        22 
+21345 James                          01-JAN-00 21345 Marketing                        20 
+21445 West                           01-DEC-99 21445 Marketing                        21 
+
+4 rows selected. 
+
+SQL> DELETE FROM EMPLOYEE WHERE E#='21445';
+
+1 row deleted.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+E#    NAME                           DOB       SUPER DNAME                            AGE
+----- ------------------------------ --------- ----- -------------------------------- ---
+21332 Jane                           26-JAN-00 21332 Marketing                        20 
+21111 Rose                           06-FEB-98 21111 Marketing                        22 
+21345 James                          01-JAN-00 21345 Marketing                        20 
+
+3 rows selected. 
+
+SQL> 
+SQL> 
+SQL> spool off

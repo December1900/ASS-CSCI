@@ -1,0 +1,54 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> CREATE TABLE Traveller
+  2  (
+  3  passport_number VARCHAR(20) NOT NULL,
+  4  nationality VARCHAR(20) NOT NULL,
+  5  first_name VARCHAR(20),
+  6  last_name VARCHAR(20),
+  7  birth_date VARCHAR(20),
+  8  CONSTRAINT travel_id PRIMARY KEY (passport_number,nationality)
+  9  );
+
+Table TRAVELLER created.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> CREATE TABLE Hotel
+  2  (
+  3  hotel_name VARCHAR(100) NOT NULL,
+  4  country VARCHAR(20) NOT NULL,
+  5  city VARCHAR(20) NOT NULL,
+  6  street_name VARCHAR(100) NOT NULL,
+  7  building_number VARCHAR(20) NOT NULL,
+  8  possessed_stars VARCHAR(20),
+  9  CONSTRAINT hotel_id PRIMARY KEY (hotel_name, city),
+ 10  CONSTRAINT hotel_location UNIQUE(country, city, street_name, building_number)
+ 11  );
+
+Table HOTEL created.
+
+SQL> 
+SQL> CREATE TABLE Recording
+  2  (
+  3  departue_date VARCHAR(20),
+  4  arrival_date VARCHAR(20),
+  5  visit_time VARCHAR(100),
+  6  travellers_number VARCHAR(20),
+  7  travellers_nationality VARCHAR(20),
+  8  hotels_name VARCHAR(100),
+  9  hotels_city VARCHAR(20),
+ 10  CONSTRAINT travellers_id FOREIGN KEY(travellers_number, travellers_nationality) REFERENCES Traveller(passport_number,nationality),
+ 11  FOREIGN KEY(hotels_name, hotels_city) REFERENCES Hotel(hotel_name, city),
+ 12  CONSTRAINT recording_id PRIMARY KEY (travellers_number, travellers_nationality)
+ 13  );
+
+Table RECORDING created.
+
+SQL> 
+SQL> SPOOL OFF

@@ -1,0 +1,46 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> INSERT INTO Traveller VALUES('P48709210', 'Chinese', 'Biao', 'GUO', '19910101');
+
+1 row inserted.
+
+SQL> INSERT INTO Traveller VALUES('P99992164', 'Chinese', 'Jun', 'LIU', '1998-02-03');
+
+1 row inserted.
+
+SQL> INSERT INTO Traveller VALUES('812215381', 'Australian', 'Eric', 'James', '1995-08-06');
+
+1 row inserted.
+
+SQL> 
+SQL> INSERT INTO Hotel VALUES('Orlando World Center Marriott', 'USA', 'Orlando', 'World Center Drive', '8701' , '5');
+
+1 row inserted.
+
+SQL> INSERT INTO Hotel VALUES('Courtyard by Marriott', 'CHINA', 'Hong Kong', 'Ping Street, Shatin, N.T.', '1' ,'5');
+
+1 row inserted.
+
+SQL> INSERT INTO Hotel VALUES('City Garden Hotel','CHINA', 'Hong Kong', 'City Garden Road, North Point', '9','4');
+
+1 row inserted.
+
+SQL> 
+SQL> INSERT INTO Recording VALUES('2019-06-01','2019-06-02','1','P48709210','Chinese','Courtyard by Marriott','Hong Kong');
+
+1 row inserted.
+
+SQL> INSERT INTO Recording VALUES('2019-08-03','2019-08-10','1','P99992164', 'Chinese','Orlando World Center Marriott', 'Orlando');
+
+1 row inserted.
+
+SQL> INSERT INTO Recording VALUES('2020-01-01','2020-01-03','1','812215381', 'Australian','Courtyard by Marriott','Hong Kong');
+
+1 row inserted.
+
+SQL> 
+SQL> SPOOL OFF

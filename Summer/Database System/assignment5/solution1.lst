@@ -1,0 +1,172 @@
+ ▲ ~ mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2723195f-b950-44f4-a13b-a8c8bbe97c7d") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten]
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten]
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten]
+2020-07-24T22:21:06.309+0800 I  CONTROL  [initandlisten] ** WARNING: soft rlimits too low. Number of files is 256, should be at least 1000
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> db.orders.update({"_id" : "Zaanse Snoepfabriek"},{$push:{"SUPPLIER.supplies":{"PRODUCT":{"product name":"Changde Noodles","category name":"Noodles"}}}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 });
+> db.orders.find({"SUPPLIER.city":"Zaandam"},{"SUPPLIER.supplies.PRODUCT.product name":1,"_id":0}).pretty();
+{
+	"SUPPLIER" : {
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Zaanse koeken"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Chocolade"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Changde Noodles"
+				}
+			}
+		]
+	}
+}
+
+> db.orders.update({"_id":"Tokyo Traders"},{"$pull":{"SUPPLIER.supplies":{"PRODUCT.product name":"Longlife Tofu"}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 });
+> db.orders.find({"_id":"Tokyo Traders"},{"SUPPLIER.supplies.PRODUCT.product name":1,"_id":0}).pretty();
+{
+	"SUPPLIER" : {
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Mishi Kobe Niku"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Ikura"
+				}
+			}
+		]
+	}
+}
+
+
+> db.orders.update({"SUPPLIER.supplies.PRODUCT.product name":"Flotemysost"},{$mul:{"SUPPLIER.supplies.$.PRODUCT.unit price": 2}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.orders.aggregate([{ "$unwind": "$SUPPLIER.supplies" },{ "$match": { "SUPPLIER.supplies.PRODUCT.product name": "Flotemysost" } },{ "$project": { "_id": 0, "product name": "$SUPPLIER.supplies.PRODUCT.product name", "unit price": "$SUPPLIER.supplies.PRODUCT.unit price" } }]).pretty()
+{ "product name" : "Flotemysost", "unit price" : 43 }
+
+
+> db.orders.update({"CUSTOMER.customer code":"FAMIA"},{$rename:{"CUSTOMER.submits":"CUSTOMER.sends"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.orders.find({"_id":"FAMIA"}).pretty()
+{
+	"_id" : "FAMIA",
+	"CUSTOMER" : {
+		"customer code" : "FAMIA",
+		"company name" : "Familia Arquibaldo",
+		"contact name" : "Aria Cruz",
+		"contact title" : "Marketing Assistant",
+		"address" : "Rua Oros, 92",
+		"city" : "SÃ£o Paulo",
+		"region" : "SP",
+		"postal code" : "05442-030",
+		"country" : "Brazil",
+		"phone" : "(11) 555-9857",
+		"fax" : null,
+		"sends" : [
+			{
+				"ORDER" : {
+					"order id" : 328,
+					"employee id" : 9,
+					"order date" : ISODate("1996-12-18T00:00:00Z"),
+					"required date" : ISODate("1997-01-01T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-25T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 13.99,
+					"ship name" : "Familia Arquibaldo",
+					"ship address" : "Rua OrÃ³s, 92",
+					"ship city" : "SÃ£o Paulo",
+					"ship region" : "SP",
+					"ship postal code" : "05442-030",
+					"ship country" : "Brazil",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Louisiana Fiery Hot Pepper Sauce",
+								"unit price" : 16.8,
+								"quantity" : 40,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Raclette Courdavault",
+								"unit price" : 44,
+								"quantity" : 9,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Scottish Longbreads",
+								"unit price" : 10,
+								"quantity" : 10,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 356,
+					"employee id" : 2,
+					"order date" : ISODate("1997-01-14T00:00:00Z"),
+					"required date" : ISODate("1997-02-11T00:00:00Z"),
+					"shipped date" : ISODate("1997-01-17T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 21.48,
+					"ship name" : "Familia Arquibaldo",
+					"ship address" : "Rua OrÃ³s, 92",
+					"ship city" : "SÃ£o Paulo",
+					"ship region" : "SP",
+					"ship postal code" : "05442-030",
+					"ship country" : "Brazil",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Filo Mix",
+								"unit price" : 5.6,
+								"quantity" : 20,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+
+> db.orders.update({"CUSTOMER.submits.ORDER.order id":310},{$set:{"CUSTOMER.submits.$.ORDER.employee id":7}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.orders.aggregate([{ "$unwind": "$CUSTOMER.submits" },{ "$match": { "CUSTOMER.submits.ORDER.order id": 310 } },{ "$project": { "_id": 0, "order id": "$CUSTOMER.submits.ORDER.order id", "employee id": "$CUSTOMER.submits.ORDER.employee id" } }]).pretty();
+{ "order id" : 310, "employee id" : 7 }

@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{color}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=cyan,
+}
+
+
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+
+% ========== Edit your name here
+\author{Yao Xiao}
+\title{Account}
+\maketitle
+
+\medskip
+
+\begin{enumerate}
+
+
+\item 
+XML for partial page(wallet,address):
+
+\includegraphics[scale=0.6]{Figure4-1.png}
+
+\item 
+XML tree for partial page(wallet,address):
+
+\includegraphics[scale=0.3]{Figure4-2.jpeg}
+
+\item 
+BPMN for updating username with cumulative effects:
+
+\includegraphics[scale=0.3]{Figure4-3.jpeg}
+
+\begin{enumerate}
+      \item Objects of interests: Application a, Username u, Outcome o, Status s.
+      \item States:
+          \begin{itemize}
+              \item[·] Application rejected or approved - rejected(a), approved(a)
+              \item[·] Username check approved or rejected, update successed- approved(u), rejected(u), successed(u)
+          \end{itemize}
+      \item Relationships between objects:
+          \begin{itemize}
+              \item[·] Application investigated with an outcome - investigated(a,o)
+              \item[·] Username stored with an status - stored(u,s)
+              \item[·] Username updated with an stauts - updated(u,s)
+              \item[·] Usernmae received with an status - received(u,s)
+          \end{itemize}
+      \item Cumulative effects of tasks:
+          \begin{enumerate}
+            \item[1.]Reject Application: \textcolor{red}{investigated(a,o) $\land$ rejected(a)}
+            \item[2.] Store Username: \textcolor{red}{investigated(a,o) $\land$ approved(a) $\land$ approved(u) $\land$ stored(u,s)}
+            \item[3.] Reject Update Username: \textcolor{red}{investigated(a,o) $\land$ approved(a) $\land$ approved)(u) $\land$ interrupted(u) $\land$ rejected(u)}
+            \item[4.] Update Success: \textcolor{red}{investigated(a,o) $\land$ approved(a) $\land$ approved(u) $\land$ stored(u,s) $\land$ successed(u)}
+            \item[5.] Update Username: \textcolor{red}{investigated(a,o) $\land$ approved(a) $\land$ approved(u) $\land$ stored(u,s) $\land$ successed(u) $\land$ updated(u,s)}
+          \end{enumerate}
+\end{enumerate}
+
+
+\item
+BPMN for updating password with cumulative effects
+
+
+
+\includegraphics[scale=0.3]{Figure4-4.jpeg}
+
+\begin{enumerate}
+      \item Objects of interests: Application a, Password p, Outcome o, Status s.
+      \item States:
+          \begin{itemize}
+              \item[·] Application rejected or approved - rejected(a), approved(a)
+              \item[·] Password availabled or unavailabled, updated rejected and successed - availabled(p), unavailabled(p), rejected(p), successed(p)
+          \end{itemize}
+      \item Relationships between objects:
+          \begin{itemize}
+              \item[·] Password set with an outcome - set(p,o)
+              \item[·] Password acquired with an outcome - acquired(p,o)
+              \item[·] Password tested with an status - tested(p,s)
+              \item[·] Password encrypted with an status - encrypted(p,s) 
+              \item[·] Password updated with an status - updated(p,s)
+              \item[·] 
+          \end{itemize}
+      \item Cumulative effects of tasks:
+          \begin{enumerate}
+            \item[1.] Set Password: \textcolor{red}{approved(a) $\land$ set(p,o)}
+            \item[2.] Acquire Password: \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o)}
+            \item[3.] Reject Update Password: \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o) $\land$ unavailabled(p) $\land$ rejected(p)} 
+            \item[4.] Test Password: \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o) $\land$ availabled(p) $\land$ tested(p,s)} 
+            \item[5.] Encrypted Password: \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o) $\land$ availabled(p) $\land$ encrypted(p,s)} 
+            \item[6.] Modify Password Success: \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o) $\land$ (availabled(p) $\land$ tested(p,s) $\land$ (availabled(p) $\land$ encrypted(p,s))) $\land$ successed(p)}
+            \item[7.] Update Password : \textcolor{red}{approved(a) $\land$ set(p,o) $\land$ acquired(p,o) $\land$ (availabled(p) $\land$ tested(p,s) $\land$ (availabled(p) $\land$ encrypted(p,s))) $\land$ successed(p) $\land$ updated(p,s)}
+
+            
+        \end{enumerate}
+  \end{enumerate}
+  
+
+
+
+\end{enumerate}
+
+\end{document}
+\grid
+\grid

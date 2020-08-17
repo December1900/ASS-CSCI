@@ -1,0 +1,35 @@
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> ALTER TABLE Recording ADD visit_hotels VARCHAR(20);
+
+Table RECORDING altered.
+
+SQL> ALTER TABLE Recording ADD visit_country VARCHAR(20);
+
+Table RECORDING altered.
+
+SQL> 
+SQL> UPDATE Recording SET visit_hotels='1', visit_country='USA' WHERE travellers_number='P48709210'
+  2  AND travellers_nationality='Chinese';
+
+1 rows updated.
+
+SQL> 
+SQL> UPDATE Recording SET visit_hotels='1', visit_country='CHINA' WHERE travellers_number='P99992164'
+  2  AND travellers_nationality='Chinese';
+
+1 rows updated.
+
+SQL> 
+SQL> UPDATE Recording SET visit_hotels='1', visit_country='CHINA' WHERE travellers_number='812215381'
+  2  AND travellers_nationality='Australian';
+
+1 rows updated.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> SPOOL OFF

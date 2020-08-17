@@ -1,0 +1,81 @@
+> db.orders.insert ( {"_id":"Wrigley Company","SUPPLIER": { "company name":"Wrigley Company", "contact name":"Aleksandar Canic", "contact title":"Sales Manager", "address":"1132 West Blackhawk Street Chicago, IL 60642 USA", "city":"Chicago", "region":null, "postal code":"60642", "country":"USA", "phone":"(312) 280-4710", "fax":"(312) 205-2600", "home page":null, "supplies":[{"PRODUCT":{"product name":"WRIGLEY'S DOUBLEMINT Chewing Gum","category name":"Chewing Gum","quantity per unit":"40 packs","unit price":19.77,"units in stock":NumberInt("5000"),"units on order":NumberInt("0"),"reorder level":NumberInt("998"),"discontinued":"N"} }]} } );
+WriteResult({ "nInserted" : 1 })
+> db.orders.insert({"_id":"GZWRC","CUSTOMER": { "customer code":"GZWRC", "company name":"JI company", "contact name":"Ge Biao", "contact title":"Marketing Manager", "address":"152, Luoyu", "city":"Wuhan", "region":null, "postal code":"430079", "country":"China", "phone":"027-67862802", "fax":"027-67863008", "submits":[{"ORDER":{"order id":NumberInt("404"),"employee id":NumberInt("8"),"order date":new Date("2020-07-15"),"required date":new Date("2020-07-20"),"shipped date":new Date("2020-07-16"),"ship via":"SF Express","freight":23,"ship name":"Ge Biao","ship address":"152, Luoyu","ship city":"Wuhan","ship region":null,"ship postal code":"430079","ship country":"China","consists of":[{"ORDER DETAIL":{"product name":"WRIGLEY'S DOUBLEMINT Chewing Gum","unit price":19.77,"quantity":NumberInt("12"),"discount":0}}]} }]} } );
+WriteResult({ "nInserted" : 1 })
+> db.orders.find({"_id":"Wrigley Company"}).pretty();
+{
+	"_id" : "Wrigley Company",
+	"SUPPLIER" : {
+		"company name" : "Wrigley Company",
+		"contact name" : "Aleksandar Canic",
+		"contact title" : "Sales Manager",
+		"address" : "1132 West Blackhawk Street Chicago, IL 60642 USA",
+		"city" : "Chicago",
+		"region" : null,
+		"postal code" : "60642",
+		"country" : "USA",
+		"phone" : "(312) 280-4710",
+		"fax" : "(312) 205-2600",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "WRIGLEY'S DOUBLEMINT Chewing Gum",
+					"category name" : "Chewing Gum",
+					"quantity per unit" : "40 packs",
+					"unit price" : 19.77,
+					"units in stock" : 5000,
+					"units on order" : 0,
+					"reorder level" : 998,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+> db.orders.find({"CUSTOMER.submits.ORDER.order id":404}).pretty();
+{
+	"_id" : "GZWRC",
+	"CUSTOMER" : {
+		"customer code" : "GZWRC",
+		"company name" : "JI company",
+		"contact name" : "Ge Biao",
+		"contact title" : "Marketing Manager",
+		"address" : "152, Luoyu",
+		"city" : "Wuhan",
+		"region" : null,
+		"postal code" : "430079",
+		"country" : "China",
+		"phone" : "027-67862802",
+		"fax" : "027-67863008",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 404,
+					"employee id" : 8,
+					"order date" : ISODate("2020-07-15T00:00:00Z"),
+					"required date" : ISODate("2020-07-20T00:00:00Z"),
+					"shipped date" : ISODate("2020-07-16T00:00:00Z"),
+					"ship via" : "SF Express",
+					"freight" : 23,
+					"ship name" : "Ge Biao",
+					"ship address" : "152, Luoyu",
+					"ship city" : "Wuhan",
+					"ship region" : null,
+					"ship postal code" : "430079",
+					"ship country" : "China",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "WRIGLEY'S DOUBLEMINT Chewing Gum",
+								"unit price" : 19.77,
+								"quantity" : 12,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}

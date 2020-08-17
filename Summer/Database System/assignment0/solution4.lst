@@ -1,0 +1,46 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> TRUNCATE TABLE hotel;
+
+Table HOTEL truncated.
+
+SQL> TRUNCATE TABLE recording;
+
+Table RECORDING truncated.
+
+SQL> 
+SQL> ALTER TABLE Hotel ADD visit_tnumber VARCHAR(20);
+
+Table HOTEL altered.
+
+SQL> 
+SQL> INSERT INTO Hotel VALUES('Orlando World Center Marriott', 'USA', 'Orlando', 'World Center Drive', '8701' , '5','2');
+
+Error starting at line : 13 in command -
+INSERT INTO Hotel VALUES('Orlando World Center Marriott', 'USA', 'Orlando', 'World Center Drive', '8701' , '5','2')
+Error report -
+ORA-00001: unique constraint (XIAOYAO.HOTEL_ID) violated
+
+SQL> 
+SQL> INSERT INTO Recording VALUES('2019-06-01','2019-06-02','1','P48709210','Chinese','Orlando World Center Marriott','Orlando','1','USA');
+
+1 row inserted.
+
+SQL> INSERT INTO Recording VALUES('2019-08-03','2019-08-10','1','P99992164', 'Chinese','City Garden Hotel', 'Hong Kong','1','CHINA');
+
+1 row inserted.
+
+SQL> INSERT INTO Recording VALUES('2020-01-01','2020-01-03','1','812215381', 'Australian','Orlando World Center Marriott','Orlando','1','USA');
+
+1 row inserted.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> SPOOL OFF

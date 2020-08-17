@@ -1,0 +1,2200 @@
+ ▲ ~ mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("0856bacb-a51e-4624-9f42-606bf10cf240") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten]
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten]
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten]
+2020-07-15T17:12:47.006+0800 I  CONTROL  [initandlisten] ** WARNING: soft rlimits too low. Number of files is 256, should be at least 1000
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> load("/Users/december/Desktop/employees.js");
+true
+> load("/Users/december/Desktop/suppliers.js");
+true
+> load("/Users/december/Desktop/customers.js");
+true
+> db.orders.find().count();
+118
+> db.orders.find().pretty();
+{
+	"_id" : 2,
+	"EMPLOYEE" : {
+		"employee id" : 2,
+		"last name" : "Fuller",
+		"first name" : "Andrew",
+		"title" : "Vice President, Sales",
+		"title of courtesy" : "Dr.",
+		"birth date" : ISODate("1952-02-19T00:00:00Z"),
+		"hire date" : ISODate("1992-08-14T00:00:00Z"),
+		"address" : "908 W. Capital Way",
+		"city" : "Tacoma",
+		"region" : "WA",
+		"postal code" : "98401",
+		"country" : "USA",
+		"home phone" : "(206) 555-9482",
+		"extension" : "3457",
+		"photo" : "andrew.jpg",
+		"notes" : "Andrew received his BTS commercial and a Ph.D. in international marketing from the University of Dallas.  He is fluent in French and Italian and reads German.  He joined the company as a sales representative, was promoted to sales manager and was then named vice president of sales.  Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.",
+		"supervises" : [
+			{
+				"EMPLOYEE" : {
+					"employee id" : 1,
+					"last name" : "Davolio",
+					"first name" : "Nancy",
+					"title" : "Sales Representative",
+					"title of courtesy" : "Ms.",
+					"birth date" : ISODate("1968-08-12T00:00:00Z"),
+					"hire date" : ISODate("1992-01-05T00:00:00Z"),
+					"address" : "507 - 20th Ave. E.Apt. 2A",
+					"city" : "Seattle",
+					"region" : "WA",
+					"postal code" : "98122",
+					"country" : "USA",
+					"home phone" : "(206) 555-9857",
+					"extension" : "5467",
+					"photo" : "nancy.jpg",
+					"notes" : "Education includes a BA in psychology from Colorado State University.  She also completed \"The Art of the Cold Call.\"  Nancy is a member of Toastmasters International.",
+					"supervises" : [ ]
+				}
+			},
+			{
+				"EMPLOYEE" : {
+					"employee id" : 3,
+					"last name" : "Leverling",
+					"first name" : "Janet",
+					"title" : "Sales Representative",
+					"title of courtesy" : "Ms.",
+					"birth date" : ISODate("1963-08-30T00:00:00Z"),
+					"hire date" : ISODate("1992-01-04T00:00:00Z"),
+					"address" : "722 Moss Bay Blvd.",
+					"city" : "Kirkland",
+					"region" : "WA",
+					"postal code" : "98033",
+					"country" : "USA",
+					"home phone" : "(206) 555-3412",
+					"extension" : "3355",
+					"photo" : "janet.jpg",
+					"notes" : "Janet has a BS degree in chemistry from Boston College).  She has also completed a certificate program in food retailing management.  Janet was hired as a sales associate and was promoted to sales representative.",
+					"supervises" : [ ]
+				}
+			},
+			{
+				"EMPLOYEE" : {
+					"employee id" : 4,
+					"last name" : "Peacock",
+					"first name" : "Margaret",
+					"title" : "Sales Representative",
+					"title of courtesy" : "Ms.",
+					"birth date" : ISODate("1958-09-19T00:00:00Z"),
+					"hire date" : ISODate("1993-05-03T00:00:00Z"),
+					"address" : "4110 Old Redmond Rd.",
+					"city" : "Redmond",
+					"region" : "WA",
+					"postal code" : "98052",
+					"country" : "USA",
+					"home phone" : "(206) 555-8122",
+					"extension" : "5176",
+					"photo" : "margaret.jpg",
+					"notes" : "Margaret holds a BA in English literature from Concordia College and an MA from the American Institute of Culinary Arts. She was temporarily assigned to the London office before returning to her permanent post in Seattle.",
+					"supervises" : [ ]
+				}
+			},
+			{
+				"EMPLOYEE" : {
+					"employee id" : 8,
+					"last name" : "Callahan",
+					"first name" : "Laura",
+					"title" : "Inside Sales Coordinator",
+					"title of courtesy" : "Ms.",
+					"birth date" : ISODate("1958-01-09T00:00:00Z"),
+					"hire date" : ISODate("1995-03-05T00:00:00Z"),
+					"address" : "4726 - 11th Ave. N.E.",
+					"city" : "Seattle",
+					"region" : "WA",
+					"postal code" : "98105",
+					"country" : "USA",
+					"home phone" : "(206) 555-1189",
+					"extension" : "2344",
+					"photo" : "laura.jpg",
+					"notes" : "Laura received a BA in psychology from the University of Washington.  She has also completed a course in business French.  She reads and writes French.",
+					"supervises" : [ ]
+				}
+			},
+			{
+				"EMPLOYEE" : {
+					"employee id" : 5,
+					"last name" : "Buchanan",
+					"first name" : "Steven",
+					"title" : "Sales Manager",
+					"title of courtesy" : "Mr.",
+					"birth date" : ISODate("1955-03-04T00:00:00Z"),
+					"hire date" : ISODate("1993-10-17T00:00:00Z"),
+					"address" : "14 Garrett Hill",
+					"city" : "London",
+					"postal code" : "SW1 8JR",
+					"country" : "UK",
+					"home phone" : "(71) 555-4848",
+					"extension" : "3453",
+					"photo" : "steven.jpg",
+					"notes" : "Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree.  Upon joining the company as a sales representative, he spent 6 months in an orientation program at the Seattle office and then returned to his permanent post in London, where he was promoted to sales manager.  Mr. Buchanan has completed the courses \"Successful Telemarketing\" and \"International Sales Management.\"  He is fluent in French.",
+					"supervises" : [
+						{
+							"EMPLOYEE" : {
+								"employee id" : 6,
+								"last name" : "Suyama",
+								"first name" : "Michael",
+								"title" : "Sales Representative",
+								"title of courtesy" : "Mr.",
+								"birth date" : ISODate("1963-07-02T00:00:00Z"),
+								"hire date" : ISODate("1993-10-17T00:00:00Z"),
+								"address" : "Coventry House Miner Rd.",
+								"city" : "London",
+								"postal code" : "EC2 7JR",
+								"country" : "UK",
+								"home phone" : "(71) 555-7773",
+								"extension" : "428",
+								"photo" : "michael.jpg",
+								"notes" : "Michael is a graduate of Sussex University (MA, economics) and the University of California at Los Angeles (MBA, marketing).  He has also taken the courses \"Multi-Cultural Selling\" and \"Time Management for the Sales Professional.\"  He is fluent in Japanese and can read and write French, Portuguese, and Spanish.",
+								"supervises" : [ ]
+							}
+						},
+						{
+							"EMPLOYEE" : {
+								"employee id" : 7,
+								"last name" : "King",
+								"first name" : "Robert",
+								"title" : "Sales Representative",
+								"title of courtesy" : "Mr.",
+								"birth date" : ISODate("1960-05-29T00:00:00Z"),
+								"hire date" : ISODate("1994-01-02T00:00:00Z"),
+								"address" : "Edgeham Hollow Winchester Way",
+								"city" : "London",
+								"postal code" : "RG1 9SP",
+								"country" : "UK",
+								"home phone" : "(71) 555-5598",
+								"extension" : "465",
+								"photo" : "robert.jpg",
+								"notes" : "Robert King served in the Peace Corps and traveled extensively before completing his degree in English at the University of Michigan and then joining the company.  After completing a course entitled \"Selling in Europe,\" he was transferred to the London office.",
+								"supervises" : [ ]
+							}
+						},
+						{
+							"EMPLOYEE" : {
+								"employee id" : 9,
+								"last name" : "Dodsworth",
+								"first name" : "Anne",
+								"title" : "Sales Representative",
+								"title of courtesy" : "Ms.",
+								"birth date" : ISODate("1969-07-02T00:00:00Z"),
+								"hire date" : ISODate("1994-11-15T00:00:00Z"),
+								"address" : "7 Houndstooth Rd.",
+								"city" : "London",
+								"postal code" : "WG2 7LT",
+								"country" : "UK",
+								"home phone" : "(71) 555-4444",
+								"extension" : "452",
+								"photo" : "anne.jpg",
+								"notes" : "Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German.",
+								"supervises" : [ ]
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Aux joyeux ecclesiastiques",
+	"SUPPLIER" : {
+		"company name" : "Aux joyeux ecclesiastiques",
+		"contact name" : "Guylene Nodier",
+		"contact title" : "Sales Manager",
+		"address" : "203, Rue des Francs-Bourgeois",
+		"city" : "Paris",
+		"region" : null,
+		"postal code" : "75004",
+		"country" : "France",
+		"phone" : "(1) 03.83.00.68",
+		"fax" : "(1) 03.83.00.62",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "CÃ´te de Blaye",
+					"category name" : "Beverages",
+					"quantity per unit" : "12 - 75 cl bottles",
+					"unit price" : 263.5,
+					"units in stock" : 17,
+					"units on order" : 0,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Bigfoot Breweries",
+	"SUPPLIER" : {
+		"company name" : "Bigfoot Breweries",
+		"contact name" : "Cheryl Saylor",
+		"contact title" : "Regional Account Rep.",
+		"address" : "3400 - 8th AvenueSuite 210",
+		"city" : "Bend",
+		"region" : "OR",
+		"postal code" : "97101",
+		"country" : "USA",
+		"phone" : "(503) 555-9931",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Sasquatch Ale",
+					"category name" : "Beverages",
+					"quantity per unit" : "24 - 12 oz bottles",
+					"unit price" : 14,
+					"units in stock" : 111,
+					"units on order" : 0,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Steeleye Stout",
+					"category name" : "Beverages",
+					"quantity per unit" : "24 - 12 oz bottles",
+					"unit price" : 18,
+					"units in stock" : 20,
+					"units on order" : 0,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Laughing Lumberjack Lager",
+					"category name" : "Beverages",
+					"quantity per unit" : "24 - 12 oz bottles",
+					"unit price" : 14,
+					"units in stock" : 52,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Cooperativa de Quesos 'Las Cabras'",
+	"SUPPLIER" : {
+		"company name" : "Cooperativa de Quesos 'Las Cabras'",
+		"contact name" : "Antonio del Valle Saavedra ",
+		"contact title" : "Export Administrator",
+		"address" : "Calle del Rosal 4",
+		"city" : "Oviedo",
+		"region" : "Asturias",
+		"postal code" : "33007",
+		"country" : "Spain",
+		"phone" : "(98) 598 76 54",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Queso Cabrales",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "1 kg pkg.",
+					"unit price" : 21,
+					"units in stock" : 22,
+					"units on order" : 30,
+					"reorder level" : 30,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Queso Manchego La Pastora",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "10 - 500 g pkgs.",
+					"unit price" : 38,
+					"units in stock" : 86,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Escargots Nouveaux",
+	"SUPPLIER" : {
+		"company name" : "Escargots Nouveaux",
+		"contact name" : "Marie Delamare",
+		"contact title" : "Sales Manager",
+		"address" : "22, rue H. Voiron",
+		"city" : "Montceau",
+		"region" : null,
+		"postal code" : "71300",
+		"country" : "France",
+		"phone" : "85.57.00.07",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Escargots de Bourgogne",
+					"category name" : "Seafood",
+					"quantity per unit" : "24 pieces",
+					"unit price" : 13.25,
+					"units in stock" : 62,
+					"units on order" : 0,
+					"reorder level" : 20,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Exotic Liquids",
+	"SUPPLIER" : {
+		"company name" : "Exotic Liquids",
+		"contact name" : "Charlotte Cooper",
+		"contact title" : "Purchasing Manager",
+		"address" : "49 Gilbert St.",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "EC1 4SD",
+		"country" : "UK",
+		"phone" : "(171) 555-2222",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Chai",
+					"category name" : "Beverages",
+					"quantity per unit" : "10 boxes x 20 bags",
+					"unit price" : 18,
+					"units in stock" : 39,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Chang",
+					"category name" : "Beverages",
+					"quantity per unit" : "24 - 12 oz bottles",
+					"unit price" : 19,
+					"units in stock" : 17,
+					"units on order" : 40,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Aniseed Syrup",
+					"category name" : "Condiments",
+					"quantity per unit" : "12 - 550 ml bottles",
+					"unit price" : 10,
+					"units in stock" : 13,
+					"units on order" : 70,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Forets d'erables",
+	"SUPPLIER" : {
+		"company name" : "Forets d'erables",
+		"contact name" : "Chantal Goulet",
+		"contact title" : "Accounting Manager",
+		"address" : "148 rue Chasseur",
+		"city" : "Ste-Hyacinthe",
+		"region" : "Quebec",
+		"postal code" : "J2S 7S8",
+		"country" : "Canada",
+		"phone" : "(514) 555-2955",
+		"fax" : "(514) 555-2921",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Sirop d'erable",
+					"category name" : "Condiments",
+					"quantity per unit" : "24 - 500 ml bottles",
+					"unit price" : 28.5,
+					"units in stock" : 113,
+					"units on order" : 0,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Tarte au sucre",
+					"category name" : "Confections",
+					"quantity per unit" : "48 pies",
+					"unit price" : 49.3,
+					"units in stock" : 17,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Formaggi Fortini s.r.l.",
+	"SUPPLIER" : {
+		"company name" : "Formaggi Fortini s.r.l.",
+		"contact name" : "Elio Rossi",
+		"contact title" : "Sales Representative",
+		"address" : "Viale Dante, 75",
+		"city" : "Ravenna",
+		"region" : null,
+		"postal code" : "48100",
+		"country" : "Italy",
+		"phone" : "(0544) 60323",
+		"fax" : "(0544) 60603",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Gorgonzola Telino",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "12 - 100 g pkgs",
+					"unit price" : 12.5,
+					"units in stock" : 0,
+					"units on order" : 70,
+					"reorder level" : 20,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Mascarpone Fabioli",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "24 - 200 g pkgs.",
+					"unit price" : 32,
+					"units in stock" : 9,
+					"units on order" : 40,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Mozzarella di Giovanni",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "24 - 200 g pkgs.",
+					"unit price" : 34.8,
+					"units in stock" : 15,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "G'day, Mate",
+	"SUPPLIER" : {
+		"company name" : "G'day, Mate",
+		"contact name" : "Wendy Mackenzie",
+		"contact title" : "Sales Representative",
+		"address" : "170 Prince Edward ParadeHunter's Hill",
+		"city" : "Sydney",
+		"region" : "NSW",
+		"postal code" : "2042",
+		"country" : "Australia",
+		"phone" : "(02) 555-5914",
+		"fax" : "(02) 555-4873",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Manjimup Dried Apples",
+					"category name" : "Produce",
+					"quantity per unit" : "50 - 300 g pkgs.",
+					"unit price" : 53,
+					"units in stock" : 20,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Filo Mix",
+					"category name" : "Grains/Cereals",
+					"quantity per unit" : "16 - 2 kg boxes",
+					"unit price" : 7,
+					"units in stock" : 38,
+					"units on order" : 0,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Perth Pasties",
+					"category name" : "Meat/Poultry",
+					"quantity per unit" : "48 pieces",
+					"unit price" : 32.8,
+					"units in stock" : 0,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "Y"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Gai paturage",
+	"SUPPLIER" : {
+		"company name" : "Gai paturage",
+		"contact name" : "Eliane Noz",
+		"contact title" : "Sales Representative",
+		"address" : "Bat. B3, rue des Alpes",
+		"city" : "Annecy",
+		"region" : null,
+		"postal code" : "74000",
+		"country" : "France",
+		"phone" : "38.76.98.06",
+		"fax" : "38.76.98.58",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Raclette Courdavault",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "5 kg pkg.",
+					"unit price" : 55,
+					"units in stock" : 79,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Camembert Pierrot",
+					"category name" : "Dairy Products",
+					"quantity per unit" : "15 - 300 g rounds",
+					"unit price" : 34,
+					"units in stock" : 19,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Grandma Kelly's Homestead",
+	"SUPPLIER" : {
+		"company name" : "Grandma Kelly's Homestead",
+		"contact name" : "Regina Murphy",
+		"contact title" : "Sales Representative",
+		"address" : "707 Oxford Rd.",
+		"city" : "Ann Arbor",
+		"region" : "MI",
+		"postal code" : "48104",
+		"country" : "USA",
+		"phone" : "(313) 555-5735",
+		"fax" : "(313) 555-3349",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Grandma's Boysenberry Spread",
+					"category name" : "Condiments",
+					"quantity per unit" : "12 - 8 oz jars",
+					"unit price" : 25,
+					"units in stock" : 120,
+					"units on order" : 0,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Uncle Bob's Organic Dried Pears",
+					"category name" : "Produce",
+					"quantity per unit" : "12 - 1 lb pkgs.",
+					"unit price" : 30,
+					"units in stock" : 15,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Northwoods Cranberry Sauce",
+					"category name" : "Condiments",
+					"quantity per unit" : "12 - 12 oz jars",
+					"unit price" : 40,
+					"units in stock" : 6,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Heli Susswaren GmbH And Co. KG",
+	"SUPPLIER" : {
+		"company name" : "Heli Susswaren GmbH And Co. KG",
+		"contact name" : "Petra Winkler",
+		"contact title" : "Sales Manager",
+		"address" : "TiergartenstraÃŸe 5",
+		"city" : "Berlin",
+		"region" : null,
+		"postal code" : "10785",
+		"country" : "Germany",
+		"phone" : "(010) 9984510",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "NuNuCa Nuss-Nougat-Creme",
+					"category name" : "Confections",
+					"quantity per unit" : "20 - 450 g glasses",
+					"unit price" : 14,
+					"units in stock" : 76,
+					"units on order" : 0,
+					"reorder level" : 30,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Gumbar Gummibarchen",
+					"category name" : "Confections",
+					"quantity per unit" : "100 - 250 g bags",
+					"unit price" : 31.23,
+					"units in stock" : 15,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Schoggi Schokolade",
+					"category name" : "Confections",
+					"quantity per unit" : "100 - 100 g pieces",
+					"unit price" : 43.9,
+					"units in stock" : 49,
+					"units on order" : 0,
+					"reorder level" : 30,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Karkki Oy",
+	"SUPPLIER" : {
+		"company name" : "Karkki Oy",
+		"contact name" : "Anne Heikkonen",
+		"contact title" : "Product Manager",
+		"address" : "Valtakatu 12",
+		"city" : "Lappeenranta",
+		"region" : null,
+		"postal code" : "53120",
+		"country" : "Finland",
+		"phone" : "(953) 10956",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Maxilaku",
+					"category name" : "Confections",
+					"quantity per unit" : "24 - 50 g pkgs.",
+					"unit price" : 20,
+					"units in stock" : 10,
+					"units on order" : 60,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Valkoinen suklaa",
+					"category name" : "Confections",
+					"quantity per unit" : "12 - 100 g bars",
+					"unit price" : 16.25,
+					"units in stock" : 65,
+					"units on order" : 0,
+					"reorder level" : 30,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Lakkalikoori",
+					"category name" : "Beverages",
+					"quantity per unit" : "500 ml",
+					"unit price" : 18,
+					"units in stock" : 57,
+					"units on order" : 0,
+					"reorder level" : 20,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Leka Trading",
+	"SUPPLIER" : {
+		"company name" : "Leka Trading",
+		"contact name" : "Chandra Leka",
+		"contact title" : "Owner",
+		"address" : "471 Serangoon Loop, Suite #402",
+		"city" : "Singapore",
+		"region" : null,
+		"postal code" : "0512",
+		"country" : "Singapore",
+		"phone" : "555-8787",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Singaporean Hokkien Fried Mee",
+					"category name" : "Grains/Cereals",
+					"quantity per unit" : "32 - 1 kg pkgs.",
+					"unit price" : 14,
+					"units in stock" : 26,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "Y"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Ipoh Coffee",
+					"category name" : "Beverages",
+					"quantity per unit" : "16 - 500 g tins",
+					"unit price" : 46,
+					"units in stock" : 17,
+					"units on order" : 10,
+					"reorder level" : 25,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Gula Malacca",
+					"category name" : "Condiments",
+					"quantity per unit" : "20 - 2 kg bags",
+					"unit price" : 19.45,
+					"units in stock" : 27,
+					"units on order" : 0,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Lyngbysild",
+	"SUPPLIER" : {
+		"company name" : "Lyngbysild",
+		"contact name" : "Niels Petersen",
+		"contact title" : "Sales Manager",
+		"address" : "LyngbysildFiskebakken 10",
+		"city" : "Lyngby",
+		"region" : null,
+		"postal code" : "2800",
+		"country" : "Denmark",
+		"phone" : "43844108",
+		"fax" : "43844115",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Rogede sild",
+					"category name" : "Seafood",
+					"quantity per unit" : "1k pkg.",
+					"unit price" : 9.5,
+					"units in stock" : 5,
+					"units on order" : 70,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Spegesild",
+					"category name" : "Seafood",
+					"quantity per unit" : "4 - 450 g glasses",
+					"unit price" : 12,
+					"units in stock" : 95,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Ma Maison",
+	"SUPPLIER" : {
+		"company name" : "Ma Maison",
+		"contact name" : "Jean-Guy Lauzon",
+		"contact title" : "Marketing Manager",
+		"address" : "2960 Rue St. Laurent",
+		"city" : "MontrÃ©al",
+		"region" : "QuÃ©bec",
+		"postal code" : "H1J 1C3",
+		"country" : "Canada",
+		"phone" : "(514) 555-9022",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Tourtiere",
+					"category name" : "Meat/Poultry",
+					"quantity per unit" : "16 pies",
+					"unit price" : 7.45,
+					"units in stock" : 21,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Pate chinois",
+					"category name" : "Meat/Poultry",
+					"quantity per unit" : "24 boxes x 2 pies",
+					"unit price" : 24,
+					"units in stock" : 115,
+					"units on order" : 0,
+					"reorder level" : 20,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Mayumi's",
+	"SUPPLIER" : {
+		"company name" : "Mayumi's",
+		"contact name" : "Mayumi Ohno",
+		"contact title" : "Marketing Representative",
+		"address" : "92 SetsukoChuo-ku",
+		"city" : "Osaka",
+		"region" : null,
+		"postal code" : "545",
+		"country" : "Japan",
+		"phone" : "(06) 431-7877",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Konbu",
+					"category name" : "Seafood",
+					"quantity per unit" : "2 kg box",
+					"unit price" : 6,
+					"units in stock" : 24,
+					"units on order" : 0,
+					"reorder level" : 5,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Tofu",
+					"category name" : "Produce",
+					"quantity per unit" : "40 - 100 g pkgs.",
+					"unit price" : 23.25,
+					"units in stock" : 35,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Genen Shouyu",
+					"category name" : "Condiments",
+					"quantity per unit" : "24 - 250 ml bottles",
+					"unit price" : 15.5,
+					"units in stock" : 39,
+					"units on order" : 0,
+					"reorder level" : 5,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "New England Seafood Cannery",
+	"SUPPLIER" : {
+		"company name" : "New England Seafood Cannery",
+		"contact name" : "Robb Merchant",
+		"contact title" : "Wholesale Account Agent",
+		"address" : "Order Processing Dept. 2100 Paul Revere Blvd.",
+		"city" : "Boston",
+		"region" : "MA",
+		"postal code" : "02134",
+		"country" : "USA",
+		"phone" : "(617) 555-3267",
+		"fax" : "(617) 555-3389",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Boston Crab Meat",
+					"category name" : "Seafood",
+					"quantity per unit" : "24 - 4 oz tins",
+					"unit price" : 18.4,
+					"units in stock" : 123,
+					"units on order" : 0,
+					"reorder level" : 30,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Jack's New England Clam Chowder",
+					"category name" : "Seafood",
+					"quantity per unit" : "12 - 12 oz cans",
+					"unit price" : 9.65,
+					"units in stock" : 85,
+					"units on order" : 0,
+					"reorder level" : 10,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "New Orleans Cajun Delights",
+	"SUPPLIER" : {
+		"company name" : "New Orleans Cajun Delights",
+		"contact name" : "Shelley Burke",
+		"contact title" : "Order Administrator",
+		"address" : "P.O. Box 78934",
+		"city" : "New Orleans",
+		"region" : "LA",
+		"postal code" : "70117",
+		"country" : "USA",
+		"phone" : "(100) 555-4822",
+		"fax" : null,
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Chef Anton's Cajun Seasoning",
+					"category name" : "Condiments",
+					"quantity per unit" : "48 - 6 oz jars",
+					"unit price" : 25,
+					"units in stock" : 53,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Chef Anton's Gumbo Mix",
+					"category name" : "Condiments",
+					"quantity per unit" : "36 boxes",
+					"unit price" : 21.35,
+					"units in stock" : 0,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "Y"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Louisiana Fiery Hot Pepper Sauce",
+					"category name" : "Condiments",
+					"quantity per unit" : "32 - 8 oz bottles",
+					"unit price" : 21.05,
+					"units in stock" : 76,
+					"units on order" : 0,
+					"reorder level" : 0,
+					"discontinued" : "N"
+				}
+			},
+			{
+				"PRODUCT" : {
+					"product name" : "Louisiana Hot Spiced Okra",
+					"category name" : "Condiments",
+					"quantity per unit" : "24 - 8 oz jars",
+					"unit price" : 17,
+					"units in stock" : 5,
+					"units on order" : 100,
+					"reorder level" : 20,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "Nord-Ost-Fisch Handelsgesellschaft mbH",
+	"SUPPLIER" : {
+		"company name" : "Nord-Ost-Fisch Handelsgesellschaft mbH",
+		"contact name" : "Sven Petersen",
+		"contact title" : "Coordinator Foreign Markets",
+		"address" : "Frahmredder 112a",
+		"city" : "Cuxhaven",
+		"region" : null,
+		"postal code" : "27478",
+		"country" : "Germany",
+		"phone" : "(04721) 8713",
+		"fax" : "(04721) 8714",
+		"home page" : null,
+		"supplies" : [
+			{
+				"PRODUCT" : {
+					"product name" : "Nord-Ost Matjeshering",
+					"category name" : "Seafood",
+					"quantity per unit" : "10 - 200 g glasses",
+					"unit price" : 25.89,
+					"units in stock" : 10,
+					"units on order" : 0,
+					"reorder level" : 15,
+					"discontinued" : "N"
+				}
+			}
+		]
+	}
+}
+Type "it" for more
+> db.orders.find({"CUSTOMER":{$exists:true}}).pretty();
+{
+	"_id" : "ALFKI",
+	"CUSTOMER" : {
+		"customer code" : "ALFKI",
+		"company name" : "Alfreds Futterkiste",
+		"contact name" : "Maria Anders",
+		"contact title" : "Sales Representative",
+		"address" : "Obere Str. 57",
+		"city" : "Berlin",
+		"region" : null,
+		"postal code" : "12209",
+		"country" : "Germany",
+		"phone" : "030-0074321",
+		"fax" : "030-0076545",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "ANATR",
+	"CUSTOMER" : {
+		"customer code" : "ANATR",
+		"company name" : "Ana Trujillo Emparedados y helados",
+		"contact name" : "Ana Trujillo",
+		"contact title" : "Owner",
+		"address" : "Avda. de la ConstituciÃ³n 2222",
+		"city" : "MÃ©xico D.F.",
+		"region" : null,
+		"postal code" : "05021",
+		"country" : "Mexico",
+		"phone" : "(5) 555-4729",
+		"fax" : "(5) 555-3745",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "ANTON",
+	"CUSTOMER" : {
+		"customer code" : "ANTON",
+		"company name" : "Antonio Moreno TaquerÃ­a",
+		"contact name" : "Antonio Moreno",
+		"contact title" : "Owner",
+		"address" : "Mataderos  2312",
+		"city" : "MÃ©xico D.F.",
+		"region" : null,
+		"postal code" : "05023",
+		"country" : "Mexico",
+		"phone" : "(5) 555-3932",
+		"fax" : null,
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "AROUT",
+	"CUSTOMER" : {
+		"customer code" : "AROUT",
+		"company name" : "Around the Horn",
+		"contact name" : "Thomas Hardy",
+		"contact title" : "Sales Representative",
+		"address" : "120 Hanover Sq.",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "WA1 1DP",
+		"country" : "UK",
+		"phone" : "(171) 555-7788",
+		"fax" : "(171) 555-6750",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 325,
+					"employee id" : 8,
+					"order date" : ISODate("1996-12-16T00:00:00Z"),
+					"required date" : ISODate("1997-01-13T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-18T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 34.24,
+					"ship name" : "Around the Horn",
+					"ship address" : "Brook Farm Stratford St. Mary",
+					"ship city" : "Colchester",
+					"ship region" : "Essex",
+					"ship postal code" : "CO7 6JX",
+					"ship country" : "UK",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gorgonzola Telino",
+								"unit price" : 10,
+								"quantity" : 4,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Grandma's Boysenberry Spread",
+								"unit price" : 25.3,
+								"quantity" : 6,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Konbu",
+								"unit price" : 4.8,
+								"quantity" : 12,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Mozzarella di Giovanni",
+								"unit price" : 27.8,
+								"quantity" : 40,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Tofu",
+								"unit price" : 18.6,
+								"quantity" : 9,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "BLAUS",
+	"CUSTOMER" : {
+		"customer code" : "BLAUS",
+		"company name" : "Blauer See Delikatessen",
+		"contact name" : "Hanna Moos",
+		"contact title" : "Sales Representative",
+		"address" : "Forsterstr. 57",
+		"city" : "Mannheim",
+		"region" : null,
+		"postal code" : "68306",
+		"country" : "Germany",
+		"phone" : "0621-08460",
+		"fax" : "0621-08924",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "BLONP",
+	"CUSTOMER" : {
+		"customer code" : "BLONP",
+		"company name" : "Blondel pere et fils",
+		"contact name" : "Frederique Citeaux",
+		"contact title" : "Marketing Manager",
+		"address" : "24, Place Kleber",
+		"city" : "Strasbourg",
+		"region" : null,
+		"postal code" : "67000",
+		"country" : "France",
+		"phone" : "88.60.15.31",
+		"fax" : "88.60.15.32",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 266,
+					"employee id" : 2,
+					"order date" : ISODate("1996-07-25T00:00:00Z"),
+					"required date" : ISODate("1996-08-22T00:00:00Z"),
+					"shipped date" : ISODate("1996-08-12T00:00:00Z"),
+					"ship via" : "Speedy Express",
+					"freight" : 55.28,
+					"ship name" : "Blondel pÃ¨re et fils",
+					"ship address" : "24, place KlÃ©ber",
+					"ship city" : "Strasbourg",
+					"ship region" : null,
+					"ship postal code" : "67000",
+					"ship country" : "France",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Queso Manchego La Pastora",
+								"unit price" : 30.4,
+								"quantity" : 12,
+								"discount" : 0.05
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 380,
+					"employee id" : 3,
+					"order date" : ISODate("1997-02-05T00:00:00Z"),
+					"required date" : ISODate("1997-03-05T00:00:00Z"),
+					"shipped date" : ISODate("1997-02-11T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 156.66,
+					"ship name" : "Blondel pÃ¨re et fils",
+					"ship address" : "24, place KlÃ©ber",
+					"ship city" : "Strasbourg",
+					"ship region" : null,
+					"ship postal code" : "67000",
+					"ship country" : "France",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Carnarvon Tigers",
+								"unit price" : 50,
+								"quantity" : 30,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Tunnbrod",
+								"unit price" : 7.2,
+								"quantity" : 15,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Wimmers gute Semmelknodel",
+								"unit price" : 26.6,
+								"quantity" : 8,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "BOLID",
+	"CUSTOMER" : {
+		"customer code" : "BOLID",
+		"company name" : "Bolido Comidas preparadas",
+		"contact name" : "Martin Sommer",
+		"contact title" : "Owner",
+		"address" : "C/ Araquil, 67",
+		"city" : "Madrid",
+		"region" : null,
+		"postal code" : "28023",
+		"country" : "Spain",
+		"phone" : "(91) 555 22 82",
+		"fax" : "(91) 555 91 99",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 295,
+					"employee id" : 4,
+					"order date" : ISODate("1996-10-10T00:00:00Z"),
+					"required date" : ISODate("1996-11-07T00:00:00Z"),
+					"shipped date" : ISODate("1996-10-14T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 77.92,
+					"ship name" : "BÃ³lido Comidas preparadas",
+					"ship address" : "C/ Araquil, 67",
+					"ship city" : "Madrid",
+					"ship region" : null,
+					"ship postal code" : "28023",
+					"ship country" : "Spain",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gnocchi di nonna Alice",
+								"unit price" : 30.4,
+								"quantity" : 4,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "BONAP",
+	"CUSTOMER" : {
+		"customer code" : "BONAP",
+		"company name" : "Bon app'",
+		"contact name" : "Laurence Lebihan",
+		"contact title" : "Owner",
+		"address" : "12, rue des Bouchers",
+		"city" : "Marseille",
+		"region" : null,
+		"postal code" : "13008",
+		"country" : "France",
+		"phone" : "91.24.45.40",
+		"fax" : "91.24.45.41",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 289,
+					"employee id" : 7,
+					"order date" : ISODate("1996-08-26T00:00:00Z"),
+					"required date" : ISODate("1996-09-23T00:00:00Z"),
+					"shipped date" : ISODate("1996-08-28T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 22.77,
+					"ship name" : "B's Beverages",
+					"ship address" : "Fauntleroy Circus",
+					"ship city" : "London",
+					"ship region" : null,
+					"ship postal code" : "EC2 5NT",
+					"ship country" : "UK",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Aniseed Syrup",
+								"unit price" : 8,
+								"quantity" : 30,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Wimmers gute Semmelknodel",
+								"unit price" : 26.6,
+								"quantity" : 9,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 300,
+					"employee id" : 9,
+					"order date" : ISODate("1996-10-16T00:00:00Z"),
+					"required date" : ISODate("1996-11-27T00:00:00Z"),
+					"shipped date" : ISODate("1996-10-21T00:00:00Z"),
+					"ship via" : "Speedy Express",
+					"freight" : 10.19,
+					"ship name" : "Bon app'",
+					"ship address" : "12, rue des Bouchers",
+					"ship city" : "Marseille",
+					"ship region" : null,
+					"ship postal code" : "13008",
+					"ship country" : "France",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Louisiana Hot Spiced Okra",
+								"unit price" : 13.6,
+								"quantity" : 30,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Scottish Longbreads",
+								"unit price" : 10,
+								"quantity" : 20,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 313,
+					"employee id" : 8,
+					"order date" : ISODate("1998-03-11T00:00:00Z"),
+					"required date" : ISODate("1998-04-08T00:00:00Z"),
+					"shipped date" : ISODate("1998-03-23T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 19.77,
+					"ship name" : "Bon app'",
+					"ship address" : "12, rue des Bouchers",
+					"ship city" : "Marseille",
+					"ship region" : null,
+					"ship postal code" : "13008",
+					"ship country" : "France",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Inlagd Sill",
+								"unit price" : 15.2,
+								"quantity" : 12,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "BOTTM",
+	"CUSTOMER" : {
+		"customer code" : "BOTTM",
+		"company name" : "Bottom-Dollar Markets",
+		"contact name" : "Elizabeth Lincoln",
+		"contact title" : "Accounting Manager",
+		"address" : "23 Tsawassen Blvd.",
+		"city" : "Tsawassen",
+		"region" : "BC",
+		"postal code" : "T2F 8M4",
+		"country" : "Canada",
+		"phone" : "(604) 555-4729",
+		"fax" : "(604) 555-3745",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 331,
+					"employee id" : 4,
+					"order date" : ISODate("1996-12-20T00:00:00Z"),
+					"required date" : ISODate("1997-01-17T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-24T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 47.42,
+					"ship name" : "Bottom-Dollar Markets",
+					"ship address" : "23 Tsawassen Blvd.",
+					"ship city" : "Tsawassen",
+					"ship region" : "BC",
+					"ship postal code" : "T2F 8M4",
+					"ship country" : "Canada",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Tourtiere",
+								"unit price" : 5.9,
+								"quantity" : 15,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 352,
+					"employee id" : 3,
+					"order date" : ISODate("1997-01-10T00:00:00Z"),
+					"required date" : ISODate("1997-02-07T00:00:00Z"),
+					"shipped date" : ISODate("1997-01-15T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 2.4,
+					"ship name" : "Bottom-Dollar Markets",
+					"ship address" : "23 Tsawassen Blvd.",
+					"ship city" : "Tsawassen",
+					"ship region" : "BC",
+					"ship postal code" : "T2F 8M4",
+					"ship country" : "Canada",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Flotemysost",
+								"unit price" : 17.2,
+								"quantity" : 2,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Louisiana Fiery Hot Pepper Sauce",
+								"unit price" : 16.8,
+								"quantity" : 35,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Teatime Chocolate Biscuits",
+								"unit price" : 7.3,
+								"quantity" : 40,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 353,
+					"employee id" : 9,
+					"order date" : ISODate("1997-01-10T00:00:00Z"),
+					"required date" : ISODate("1997-02-07T00:00:00Z"),
+					"shipped date" : ISODate("1997-01-21T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 23.65,
+					"ship name" : "Bottom-Dollar Markets",
+					"ship address" : "23 Tsawassen Blvd.",
+					"ship city" : "Tsawassen",
+					"ship region" : "BC",
+					"ship postal code" : "T2F 8M4",
+					"ship country" : "Canada",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gumbar Gummibarchen",
+								"unit price" : 24.9,
+								"quantity" : 6,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 373,
+					"employee id" : 4,
+					"order date" : ISODate("1997-01-30T00:00:00Z"),
+					"required date" : ISODate("1997-02-13T00:00:00Z"),
+					"shipped date" : ISODate("1997-02-07T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 44.17,
+					"ship name" : "Bottom-Dollar Markets",
+					"ship address" : "23 Tsawassen Blvd.",
+					"ship city" : "Tsawassen",
+					"ship region" : "BC",
+					"ship postal code" : "T2F 8M4",
+					"ship country" : "Canada",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Singaporean Hokkien Fried Mee",
+								"unit price" : 11.2,
+								"quantity" : 50,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Teatime Chocolate Biscuits",
+								"unit price" : 7.3,
+								"quantity" : 21,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "BSBEV",
+	"CUSTOMER" : {
+		"customer code" : "BSBEV",
+		"company name" : "B's Beverages",
+		"contact name" : "Victoria Ashworth",
+		"contact title" : "Sales Representative",
+		"address" : "Fauntleroy Circus",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "EC2 5NT",
+		"country" : "UK",
+		"phone" : "(171) 555-1212",
+		"fax" : null,
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "CACTU",
+	"CUSTOMER" : {
+		"customer code" : "CACTU",
+		"company name" : "Cactus Comidas para llevar",
+		"contact name" : "Patricio Simpson",
+		"contact title" : "Sales Agent",
+		"address" : "Cerrito 333",
+		"city" : "Buenos Aires",
+		"region" : null,
+		"postal code" : "1010",
+		"country" : "Argentina",
+		"phone" : "(1) 135-5555",
+		"fax" : "(1) 135-4892",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "CENTC",
+	"CUSTOMER" : {
+		"customer code" : "CENTC",
+		"company name" : "Centro comercial Moctezuma",
+		"contact name" : "Francisco Chang",
+		"contact title" : "Marketing Manager",
+		"address" : "Sierras de Granada 9993",
+		"city" : "Mexico D.F.",
+		"region" : null,
+		"postal code" : "05022",
+		"country" : "Mexico",
+		"phone" : "(5) 555-3392",
+		"fax" : "(5) 555-7293",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "CHOPS",
+	"CUSTOMER" : {
+		"customer code" : "CHOPS",
+		"company name" : "Chop-suey Chinese",
+		"contact name" : "Yang Wang",
+		"contact title" : "Owner",
+		"address" : "Hauptstr. 29",
+		"city" : "Bern",
+		"region" : null,
+		"postal code" : "3012",
+		"country" : "Switzerland",
+		"phone" : "0452-076545",
+		"fax" : null,
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 309,
+					"employee id" : 6,
+					"order date" : ISODate("1996-12-03T00:00:00Z"),
+					"required date" : ISODate("1996-12-31T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-27T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 1.17,
+					"ship name" : "Chop-suey Chinese",
+					"ship address" : "Hauptstr. 31",
+					"ship city" : "Bern",
+					"ship region" : null,
+					"ship postal code" : "3012",
+					"ship country" : "Switzerland",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Chef Anton's Cajun Seasoning",
+								"unit price" : 17.6,
+								"quantity" : 20,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Flotemysost",
+								"unit price" : 17.2,
+								"quantity" : 3,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Grandma's Boysenberry Spread",
+								"unit price" : 20,
+								"quantity" : 30,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Ipoh Coffee",
+								"unit price" : 36.8,
+								"quantity" : 20,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Singaporean Hokkien Fried Mee",
+								"unit price" : 11.2,
+								"quantity" : 2,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "COMMI",
+	"CUSTOMER" : {
+		"customer code" : "COMMI",
+		"company name" : "Comercio Mineiro",
+		"contact name" : "Pedro Afonso",
+		"contact title" : "Sales Associate",
+		"address" : "Av. dos Lusiadas, 23",
+		"city" : "SÃ£o Paulo",
+		"region" : "SP",
+		"postal code" : "05432-043",
+		"country" : "Brazil",
+		"phone" : "(11) 555-7647",
+		"fax" : null,
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "CONSH",
+	"CUSTOMER" : {
+		"customer code" : "CONSH",
+		"company name" : "Consolidated Holdings",
+		"contact name" : "Elizabeth Brown",
+		"contact title" : "Sales Representative",
+		"address" : "Berkeley Gardens 12  Brewery ",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "WX1 6LT",
+		"country" : "UK",
+		"phone" : "(171) 555-2282",
+		"fax" : "(171) 555-9199",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 379,
+					"employee id" : 8,
+					"order date" : ISODate("1997-02-04T00:00:00Z"),
+					"required date" : ISODate("1997-03-18T00:00:00Z"),
+					"shipped date" : ISODate("1997-02-07T00:00:00Z"),
+					"ship via" : "United Package",
+					"freight" : 9.21,
+					"ship name" : "Consolidated Holdings",
+					"ship address" : "Berkeley Gardens 12  Brewery ",
+					"ship city" : "London",
+					"ship region" : null,
+					"ship postal code" : "WX1 6LT",
+					"ship country" : "UK",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Chang",
+								"unit price" : 15.2,
+								"quantity" : 40,
+								"discount" : 0.15
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gula Malacca",
+								"unit price" : 15.5,
+								"quantity" : 2,
+								"discount" : 0.15
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Pavlova",
+								"unit price" : 13.9,
+								"quantity" : 35,
+								"discount" : 0.15
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "DRACD",
+	"CUSTOMER" : {
+		"customer code" : "DRACD",
+		"company name" : "Drachenblut Delikatessen",
+		"contact name" : "Sven Ottlieb",
+		"contact title" : "Order Administrator",
+		"address" : "Walserweg 21",
+		"city" : "Aachen",
+		"region" : null,
+		"postal code" : "52066",
+		"country" : "Germany",
+		"phone" : "0241-039123",
+		"fax" : "0241-059428",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 333,
+					"employee id" : 3,
+					"order date" : ISODate("1996-12-23T00:00:00Z"),
+					"required date" : ISODate("1997-01-20T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-31T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 5.45,
+					"ship name" : "Drachenblut Delikatessen",
+					"ship address" : "Walserweg 21",
+					"ship city" : "Aachen",
+					"ship region" : null,
+					"ship postal code" : "52066",
+					"ship country" : "Germany",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Flotemysost",
+								"unit price" : 17.2,
+								"quantity" : 40,
+								"discount" : 0.1
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Sir Rodney's Scones",
+								"unit price" : 8,
+								"quantity" : 10,
+								"discount" : 0.1
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Tofu",
+								"unit price" : 18.6,
+								"quantity" : 10,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "DUMON",
+	"CUSTOMER" : {
+		"customer code" : "DUMON",
+		"company name" : "Du monde entier",
+		"contact name" : "Janine Labrune",
+		"contact title" : "Owner",
+		"address" : "67, rue des Cinquante Otages",
+		"city" : "Nantes",
+		"region" : null,
+		"postal code" : "44000",
+		"country" : "France",
+		"phone" : "40.67.88.88",
+		"fax" : "40.67.89.89",
+		"submits" : [ ]
+	}
+}
+{
+	"_id" : "EASTC",
+	"CUSTOMER" : {
+		"customer code" : "EASTC",
+		"company name" : "Eastern Connection",
+		"contact name" : "Ann Devon",
+		"contact title" : "Sales Agent",
+		"address" : "35 King George",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "WX3 6FW",
+		"country" : "UK",
+		"phone" : "(171) 555-0297",
+		"fax" : "(171) 555-3373",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 342,
+					"employee id" : 1,
+					"order date" : ISODate("1997-01-01T00:00:00Z"),
+					"required date" : ISODate("1997-01-29T00:00:00Z"),
+					"shipped date" : ISODate("1997-01-16T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 83.93,
+					"ship name" : "Eastern Connection",
+					"ship address" : "35 King George",
+					"ship city" : "London",
+					"ship region" : null,
+					"ship postal code" : "WX3 6FW",
+					"ship country" : "UK",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Chang",
+								"unit price" : 15.2,
+								"quantity" : 24,
+								"discount" : 0.2
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gorgonzola Telino",
+								"unit price" : 10,
+								"quantity" : 56,
+								"discount" : 0.2
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "FAMIA",
+	"CUSTOMER" : {
+		"customer code" : "FAMIA",
+		"company name" : "Familia Arquibaldo",
+		"contact name" : "Aria Cruz",
+		"contact title" : "Marketing Assistant",
+		"address" : "Rua Oros, 92",
+		"city" : "SÃ£o Paulo",
+		"region" : "SP",
+		"postal code" : "05442-030",
+		"country" : "Brazil",
+		"phone" : "(11) 555-9857",
+		"fax" : null,
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 328,
+					"employee id" : 9,
+					"order date" : ISODate("1996-12-18T00:00:00Z"),
+					"required date" : ISODate("1997-01-01T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-25T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 13.99,
+					"ship name" : "Familia Arquibaldo",
+					"ship address" : "Rua OrÃ³s, 92",
+					"ship city" : "SÃ£o Paulo",
+					"ship region" : "SP",
+					"ship postal code" : "05442-030",
+					"ship country" : "Brazil",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Louisiana Fiery Hot Pepper Sauce",
+								"unit price" : 16.8,
+								"quantity" : 40,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Raclette Courdavault",
+								"unit price" : 44,
+								"quantity" : 9,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Scottish Longbreads",
+								"unit price" : 10,
+								"quantity" : 10,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			},
+			{
+				"ORDER" : {
+					"order id" : 356,
+					"employee id" : 2,
+					"order date" : ISODate("1997-01-14T00:00:00Z"),
+					"required date" : ISODate("1997-02-11T00:00:00Z"),
+					"shipped date" : ISODate("1997-01-17T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 21.48,
+					"ship name" : "Familia Arquibaldo",
+					"ship address" : "Rua OrÃ³s, 92",
+					"ship city" : "SÃ£o Paulo",
+					"ship region" : "SP",
+					"ship postal code" : "05442-030",
+					"ship country" : "Brazil",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Filo Mix",
+								"unit price" : 5.6,
+								"quantity" : 20,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+{
+	"_id" : "FISSA",
+	"CUSTOMER" : {
+		"customer code" : "FISSA",
+		"company name" : "FISSA Fabrica Inter. Salchichas S.A.",
+		"contact name" : "Diego Roel",
+		"contact title" : "Accounting Manager",
+		"address" : "C/ Moralzarzal, 86",
+		"city" : "Madrid",
+		"region" : null,
+		"postal code" : "28034",
+		"country" : "Spain",
+		"phone" : "(91) 555 94 44",
+		"fax" : "(91) 555 55 93",
+		"submits" : [ ]
+	}
+}
+Type "it" for more
+> db.orders.find({"CUSTOMER.contact name":"Maria Anders"}).pretty();
+{
+	"_id" : "ALFKI",
+	"CUSTOMER" : {
+		"customer code" : "ALFKI",
+		"company name" : "Alfreds Futterkiste",
+		"contact name" : "Maria Anders",
+		"contact title" : "Sales Representative",
+		"address" : "Obere Str. 57",
+		"city" : "Berlin",
+		"region" : null,
+		"postal code" : "12209",
+		"country" : "Germany",
+		"phone" : "030-0074321",
+		"fax" : "030-0076545",
+		"submits" : [ ]
+	}
+}
+> db.orders.find({"CUSTOMER.submits.ORDER.order id":325}).pretty();
+{
+	"_id" : "AROUT",
+	"CUSTOMER" : {
+		"customer code" : "AROUT",
+		"company name" : "Around the Horn",
+		"contact name" : "Thomas Hardy",
+		"contact title" : "Sales Representative",
+		"address" : "120 Hanover Sq.",
+		"city" : "London",
+		"region" : null,
+		"postal code" : "WA1 1DP",
+		"country" : "UK",
+		"phone" : "(171) 555-7788",
+		"fax" : "(171) 555-6750",
+		"submits" : [
+			{
+				"ORDER" : {
+					"order id" : 325,
+					"employee id" : 8,
+					"order date" : ISODate("1996-12-16T00:00:00Z"),
+					"required date" : ISODate("1997-01-13T00:00:00Z"),
+					"shipped date" : ISODate("1996-12-18T00:00:00Z"),
+					"ship via" : "Federal Shipping",
+					"freight" : 34.24,
+					"ship name" : "Around the Horn",
+					"ship address" : "Brook Farm Stratford St. Mary",
+					"ship city" : "Colchester",
+					"ship region" : "Essex",
+					"ship postal code" : "CO7 6JX",
+					"ship country" : "UK",
+					"consists of" : [
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Gorgonzola Telino",
+								"unit price" : 10,
+								"quantity" : 4,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Grandma's Boysenberry Spread",
+								"unit price" : 25.3,
+								"quantity" : 6,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Konbu",
+								"unit price" : 4.8,
+								"quantity" : 12,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Mozzarella di Giovanni",
+								"unit price" : 27.8,
+								"quantity" : 40,
+								"discount" : 0
+							}
+						},
+						{
+							"ORDER DETAIL" : {
+								"product name" : "Tofu",
+								"unit price" : 18.6,
+								"quantity" : 9,
+								"discount" : 0
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
+>

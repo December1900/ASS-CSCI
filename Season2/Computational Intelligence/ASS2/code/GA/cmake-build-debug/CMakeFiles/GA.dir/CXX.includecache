@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/december/Desktop/GA/GA.cpp
+iostream
+-
+fstream
+-
+iomanip
+-
+cmath
+-
+cstdlib
+-
+cstdio
+-
+vector
+-
+time.h
+-
+

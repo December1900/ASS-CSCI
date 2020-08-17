@@ -1,0 +1,88 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> 
+SQL> SELECT possessed_stars from hotel where hotel_name = (select hotels_name from recording where travellers_number = 'P48709210'
+  2  AND travellers_nationality='Chinese');
+
+POSSESSED_STARS     
+--------------------
+5
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT possessed_stars from hotel where hotel_name = (select hotels_name from recording where travellers_number = 'P99992164'
+  2  AND travellers_nationality='Chinese');
+
+POSSESSED_STARS     
+--------------------
+4
+
+1 row selected. 
+
+SQL> 
+SQL> 
+SQL> SELECT hotel_name FROM hotel;
+
+HOTEL_NAME                                                                                          
+----------------------------------------------------------------------------------------------------
+City Garden Hotel
+Courtyard by Marriott
+Orlando World Center Marriott
+
+3 rows selected. 
+
+SQL> 
+SQL> SELECT visit_tnumber FROM hotel WHERE hotel_name='City Garden Hotel';
+
+VISIT_TNUMBER       
+--------------------
+1
+
+1 row selected. 
+
+SQL> SELECT visit_tnumber FROM hotel WHERE hotel_name='Courtyard by Marriott';
+
+VISIT_TNUMBER       
+--------------------
+0
+
+1 row selected. 
+
+SQL> SELECT visit_tnumber FROM hotel WHERE hotel_name='Orlando World Center Marriott';
+
+VISIT_TNUMBER       
+--------------------
+2
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT hotel_name FROM hotel WHERE visit_tnumber = '0';
+
+HOTEL_NAME                                                                                          
+----------------------------------------------------------------------------------------------------
+Courtyard by Marriott
+
+1 row selected. 
+
+SQL> 
+SQL> SELECT last_name FROM traveller UNION SELECT hotel_name from hotel;
+
+LAST_NAME                                                                                           
+----------------------------------------------------------------------------------------------------
+City Garden Hotel
+Courtyard by Marriott
+GUO
+James
+LIU
+Orlando World Center Marriott
+
+6 rows selected. 
+
+SQL> 
+SQL> SPOOL OFF

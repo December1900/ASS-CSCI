@@ -1,0 +1,119 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+
+
+
+
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+
+% ========== Edit your name here
+\author{Yao Xiao}
+\title{A new certificateless aggregate signature scheme}
+\maketitle
+
+\medskip
+
+% ========== Begin answering questions here
+\section{Preliminaries}
+\subsection{Assumptions}
+\textbf{Definition 1.} Computational Diffie-Hellman(CDH)Problem:Let G be an additive cyclic group with generator P. Given $P, aP, bP \in \mathbb{G}$,for any random numbers \(a, b \in \mathbb{Z}_{q}^{*}\) compute \(a b P\)
+There is an probabilistic polynomial time(PPT) solvable algorithm \(\mathcal{A}\) has negligible advantage \(\epsilon\) in solving \(\mathrm{CDH}\) problem in \(\mathbb{G}\) if the \(\operatorname{Pr}[\mathcal{A}(P, a P, b P)=a b P] \leq \epsilon,\) where \(\epsilon\) is a small positive integer and the probability is over the selection of \(P \in \mathbb{G},\) random numbers \(a, b \mathbb{Z}_{q}^{*}\) and the security parameter \(1^{\mu} .\) This can be formally presented by the following definition.\\
+\textbf{Definition 2.} Computational Diffe-Hellman(CDH) Assumption: The assumption \((t, \epsilon)\) CDH holds in \(\mathbb{G}\) if there does not exist any PPT algorithm with running time t has advantage
+\(\epsilon\) in solving \(\mathrm{CDH}\) problem.
+\subsection{Framework of certificateless aggregate signature}
+An aggregate signature scheme is a signature scheme which allows an efficient algorithm to aggregate n signatures on n distinct messages from n distinct users into one single signature. The validity of an aggregate signature will convince a verifier that the n users did indeed sign the n original messages.\\
+A CLAS scheme involves a KGC, an aggregating set \(\mathcal{U}\) of n users $U_1, . . . , U_n$ and an aggregate signature generator. It consists of six algorithms: Setup, Partial-Private-Key-Extract, UserKeyGen, Sign, Aggregate and Aggregate Verify. The description of each algorithm is as follows:\\
+There are 6 parts, the setup is executed by KGC, which accepts security parameters $\ell$ to generate a master key and a system parameter list. As for aggregate, run by the collective signature generator takes as input the state information $\Delta$, a set \(\mathcal{U}\) of n users $U_1, ..., U_n$, the identity $ID_i$ of each user $U_i$, and the corresponding public key $P_i$. A signature $U_i$ is present on a message $M_1$ with status information $\Delta$ under the identity $ID_i$ and public key $P_i$ of each user $U_i$. The output of this algorithm is the aggregated signature $\sigma$ on messages $M_1, ..., M_n$.
+
+\subsection{Adversarial mode of certificateless aggregate signature}
+Security of CLAS scheme is defined through two games between the adversary \(\mathcal{A}_{I} / \mathcal{A}_{I I}\) and challenger \(\mathcal{C} .\) The two games are defined as:\\
+For Game 1, the adversary \(\mathcal{A}_{I}\) can perform a polynomially bounded number of the following types of queries in an adaptive manner, and following method to win game: $\sigma^*$ is a valid aggregate signature on messages ${M^*_1,...,M^*_n}$ with state information $\delta^*$ chosen by \(\mathcal{A}_{I}\).\\
+For Game 2, the adversary \(\mathcal{A}_{II}\) can perform a polynomially bounded number of the following types of queries in an adaptive manner, and following method to win game:$\sigma^*$ is a valid aggregate signature on messages ${M^*_1,...,M^*_n}$ with state information $\delta^*$ chosen by \(\mathcal{A}_{II}\)\\
+If in any of the above two games, the success probability of any polynomial bounded opponent can be ignored, then the CLAS scheme will be unforgeable under adaptive selection message attack.
+
+\section{Security proof}
+\subsection{Theorem 1.}
+In the random oracle model, if there is an opponent \(\mathcal{A}_{I}\) of type I, after a maximum of $q_k$, within the time t, with the security parameter, the CLAS scheme is forged in the attack modeled in Game 1. Signature has advantages $\varepsilon$. Multiply part-private-key query, $g_p$ multiply by public key query, $q_{Hi}$ multiply by $H_i (i = 1, 2, 3)$ query, $q_s$ multiply by Sign query, then CDH in G1 can be solved in a period problem. It's the basic theorem:
+\begin{equation}
+      t+\mathcal{O}\left(q_{H_{1}}+q_{H_{2}}+q_{H_{3}}+q_{K}+q_{P}+q_{S}\right) \tau_{G_{1}}
+\end{equation}
+
+\textbf{Proof}: $H_1$ queries: $\ell$ maintains a list $H^{list}_1$ of tuples $(ID_j,\alpha_j,Q_j,c_j)$. This list is initially empty. Whenever receiving an $H_1$ query on $ID_i$, the same answer from the list $H^{list}_1$. $H_2$ queries: $\ell$ keeps a list $H^{list}_2$ of tuples$(\delta_j,W_j,\beta_j)$. This list is initailly empty. Whenever $A_1$ issues a query $H_2(\delta_i)$, the same answer from the list $H_2$. $H_3$ queries: $\ell$ keeps a list $H^{list}_3$ of tuples$(\delta_j,M_j,ID_j,P_j,S_j,\gamma_j)$. Whenever $A_1$ issues a query $(\delta_i||M_i||ID_i||P_i||R_i)$ to $H_3$, the same answer from the list $H_3$ will be given if the request has benn asked before.\\
+Otherwise $\ell$ first makes an $H_1$ query on $ID_i$ and finds the tuples and does as follows:
+\begin{enumerate}
+  \item if $c_i$=0, abort.
+  \item Else if there's a tuple $(ID_i,x_i,D_i,P_i)$ on $K^{list}$, set $D_i = \alpha_iP_T$ and return $D_i$ as answer. 
+  \item Otherwise, compute $D_i = \alpha_iP_T$, set $x_i=P_i=\bot$. 
+\end{enumerate}
+For Public-Key queries: \(\mathcal{A}_{I}\) can choose a new public key for the user whose identity is $ID_i$.
+\begin{enumerate}
+      \item If there's a tuple \(\left(I D_{i} x_{i} D_{i} P_{i}\right)\) on \(\mathbf{K}^{\text {list }}\) (in this case, the public key \(P_{i}\) of \(I D_{i}\) is \(\perp\) ), choose \(x_{i}^{\prime} \in Z_{q}^{*},\) compute \(P_{i}^{\prime}=x_{i}^{\prime} P,\) return \(P_{i}^{\prime}\) as answer and update \(\left(I D_{i} x_{i}, D_{i} P_{i}\right)\) to \(\left(I D_{i}, x_{i}^{\prime}, D_{i}, P_{i}^{\prime}\right)\)
+      \item Otherwise, choose \(x_{i} \in Z_{q}^{*},\) compute \(P_{i}=x_{i} P,\) return \(P_{i}\) as answer, set \(D_{i}=\perp\) and add \(\left(I D_{i}, x_{i}, D_{i} P_{i}\right)\) to \(\mathbf{K}^{\text {list }}\)
+\end{enumerate}
+For Sign queries: 
+\begin{enumerate}
+      \item If \(c_{i}=0,\) choose \(r_{i}, \gamma_{i} \in Z_{q_{i} \text { set }}^{*} R_{i}=r_{i} P-\gamma_{i}^{-1} Q_{i}, \operatorname{set} S_{i}=\gamma_{i} P_{T},\) add\(\left(A_{i} M_{i}, I D_{i} P_{i} R_{i}, S_{i}, \gamma_{i}\right)\) to \(\mathbf{H}_{3}^{\text {list }}\) (if there is a tuple \(\left(A_{i}, M_{i}, I_{i}, P_{i}, R_{i}-\right.\)\(\left.S_{i} \gamma_{i}\right)\) on \(\mathbf{H}_{3}^{\text {list }},\) then redo this step), compute \(V_{i}=\beta_{i} P_{i}+r_{i} \gamma_{i} P_{T}\)\[\text { output } \sigma_{i}=\left(R_{i} V_{i}\right)\]
+      \item Else \(c_{i}=1,\) randomly choose \(R_{i} \in G_{1},\) set \(V_{i}=\alpha_{i} P_{T}+\beta_{i} P_{i}+\gamma_{i} R_{i}\)
+      \[\text { output } \sigma_{i}=\left(R_{i} V_{i}\right)\]
+\end{enumerate}
+In addition, the forged aggregate signature must satisfy:
+\begin{equation}
+      (e\left(V^{*}, P\right)=e\left(P_{T}, \sum_{i=1}^{n} Q_{i}^{*}\right) e\left(W^{*}, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(S_{i}^{*}, R_{i}^{*}\right)
+\end{equation}
+Because knowing $Q_{1}^{*}=\alpha_{1}^{*} b P, W^{*}= \beta^{*}P, S_{1}^{*}=\gamma_{1}^{*} P;$ and for all i,$2 \le i \le n$, $Q_{i}^{*}=\alpha_{i}^{*} P, S_{i}^{*}=\gamma_{i}P;$. Hence \(\mathcal{C}\) can compute:
+\begin{align}
+      e\left(V^{*}, P\right)&=e\left(P_{T}, \sum_{i=1}^{n} Q_{i}^{*}\right) e\left(W^{*}, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(S_{i}^{*}, R_{i}^{*}\right)\\
+      &= e\left(P_{T}, \sum_{i=1}^{n} \alpha_{1}^{*}bP\right) e\left(\beta^{*}P, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(\gamma_{1}^{*}P, R_{i}^{*}\right)\\
+      \Rightarrow a b P&=\alpha_{1}^{*-1}\left(V^{*}-\sum_{i=2}^{n}\left(\alpha_{i}^{*} P_{T}+\beta^{*} P_{i}^{*}+\gamma_{i}^{*} R_{i}^{*}\right)-\beta^{*} P_{1}^{*}-\gamma_{1}^{*} R_{1}^{*}\right)
+\end{align}
+\textit{Probability of success}: $\varepsilon^{\prime}=\operatorname{Pr}[E 1 \wedge E 2 \wedge E 3] \ge(1-\delta)^{q_{K}} \varepsilon \delta(1-\delta)^{n-1}=\delta(1-\delta)^{\left(q_{K}+n-1\right)} \varepsilon$. When $\delta=\frac{1}{q_{\mathrm{K}}+n}, \delta(1-\delta)^{(9 \mathrm{x}+n-1)} \varepsilon$ is maximized at $\frac{1}{q_{K}+n}\left(1-\frac{1}{q_{K}+n}\right)^{\left(q_{K}+n-1\right)} \varepsilon$
+With sufficient large $q_{K},$ this probability turns to $\frac{1}{\frac{1}{q_{\mathrm{K}}+n_{\mathrm{l}}}} \varepsilon$. Hence, we have $\varepsilon^{\prime} \ge \frac{1}{\left(q_{\mathrm{x}}+n\right) e} \varepsilon$.
+
+\subsection{Theorem 2.}
+In the random oracle model, if there exists a type II adversary \(\mathcal{A}_{II}\) who has an advantage $\varepsilon$ in forging a signature of our CLAS scheme in an attack modeled by Game 2 running in time t for a security parameter $\ell$ and asking at most $q_P$ times Public-Key queries, $q_K$ times Secret-Key queries, $H_i$ times $H_i$(i = 2,3) queries, $q_S$ times Sign queries, then the CDH problem in $G_1$
+\begin{equation}
+      t+\mathcal{O}\left(q_{H_{2}}+q_{H_{3}}+q_{P}+q_{S}\right) \tau_{G_{1}}
+\end{equation}\\
+\textbf{Proof}: Most of them are the same as Theorem1.\\
+For Sign queries:
+\begin{enumerate}
+      \item If \(c_{i}=0,\) choose \(r_{i} \in Z_{q}^{*},\) set \(R_{i}=r_{i} P-\left(\beta_{i} x_{i} / \gamma_{i}\right) b P, S_{i}=\gamma_{i} a P,\) add
+      \(\left(\Delta_{i}, M_{i}, I D_{i}, P_{i}, R_{i}, S_{i}, \gamma_{i}\right)\) to \(\mathbf{H}_{3}^{\text {list }}\) (if there is a tuple \(\left(\Delta_{i}, M_{i}, I_{i}, P_{i}\right.\)
+      \(\left.R_{i} S_{i} \gamma_{i}\right)\) exists on \(\mathbf{H}_{3}^{\mathrm{list}},\) then redo this step), compute \(V_{i}=\) \(r_{i} P+\lambda H_{1}\left(I D_{i}\right),\) output \(\sigma_{i}=\left(R_{i}, V_{i}\right)\)
+      \item Else \(c_{i}=1,\) generate \(\sigma_{i}=\left(R_{i}, V_{i}\right)\) use the standard Sign algorithm, output \(\sigma_{i}=\left(R_{i}, V_{i}\right)\)
+\end{enumerate}
+In addition, the forged aggregate signature must satisfy:
+\begin{equation*}
+      e\left(V^{*}, P\right)=e\left(P_{T}, \sum_{i=1}^{n} Q_{i}^{*}\right) e\left(W^{*}, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(S_{i}^{*}, R_{i}^{*}\right)
+\end{equation*}
+Because knowing  \(P_{1}^{*}=x_{1}^{*} b P, W^{*}=\beta^{*} a P, S_{1}^{*}=\gamma_{1}^{*} P ;\) for all \(i, 2 \le i \le n, P_{i}^{*}=x_{i}^{*} P, S_{i}^{*}=\gamma_{i}^{*} P ;\). Hence \(\mathcal{C}\) can compute:
+\begin{align}
+      e\left(V^{*}, P\right)&=e\left(P_{T}, \sum_{i=1}^{n} Q_{i}^{*}\right) e\left(W^{*}, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(S_{i}^{*}, R_{i}^{*}\right)\\
+      &=e\left(x_{T}^{*} b P, \sum_{i=1}^{n} Q_{i}^{*}\right) e\left(\beta^{*} a P, \sum_{i=1}^{n} P_{i}^{*}\right) \prod_{i=1}^{n} e\left(\gamma_{i}^{*} P, R_{i}^{*}\right)\\
+      \Rightarrow a b P&=\left(x_{1}^{*} \beta^{*}\right)^{-1}\left(V^{*}-\sum_{i=2}^{n}\left(\lambda \mathrm{Q}_{i}^{*}+x_{i}^{*} W^{*}+\gamma_{i}^{*} R_{i}^{*}\right)-\lambda \mathrm{Q}_{1}^{*}-\gamma_{1}^{*} R_{1}^{*}\right)
+\end{align}
+\textit{Probability of success}: \(\varepsilon^{\prime}=\operatorname{Pr}[E 1 \wedge E 2 \wedge E 3] \ge \delta(1-\delta)^{\left(q_{K}+n-1\right)} \varepsilon\)
+When \(\delta=\frac{1}{q_{\mathrm{K}+n}}, \delta(1-\delta)^{(9 \mathrm{x}+n-1)} \varepsilon\) is maximized at
+\(\frac{1}{q_{K}+n}\left(1-\frac{1}{q_{K}+n}\right)^{\left(q_{K}+n-1\right)} \varepsilon\)
+With sufficient large \(q_{K},\) this probability turns to \(\frac{1}{\left(q_{K}+n\right) e} \varepsilon .\) Hence, we have \(\varepsilon^{\prime} \ge \frac{1}{\left(q_{K}+n\right) e} \varepsilon\)
+
+
+
+
+\section{Conclusion}
+An efficient construction of a security model and certificateless aggregate signature scheme is proposed. Assuming that the CDH problem is difficult, the CLAS scheme is proved to be unforgeable under the adaptive selection message attack under the random oracle model. Because CL-PKC has some advantages over traditional PKC and ID-PKC, our CLAS solution may need to compress many different certificateless signatures into one signed application.\\
+
+\end{document}
+\grid
+\grid
