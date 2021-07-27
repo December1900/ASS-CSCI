@@ -1,0 +1,9 @@
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_t1b.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_t1a.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_6.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_4.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_7.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_5.dir
+/Users/december/Desktop/lab03/cmake-build-debug/CMakeFiles/lab03_2.dir

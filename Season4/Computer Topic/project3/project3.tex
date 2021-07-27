@@ -1,0 +1,268 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\lstdefinestyle{lfonts}{ 
+    basicstyle = \footnotesize\ttfamily, 
+    stringstyle = \color{purple}, 
+    keywordstyle = \color{blue!60!black}\bfseries, 
+    commentstyle = \color{olive}\scshape, 
+} 
+\lstdefinestyle{lnumbers}{ 
+    numbers = left, 
+    numberstyle = \tiny, 
+    numbersep = 1em, 
+    firstnumber = 1, 
+    stepnumber = 1, 
+} 
+\lstdefinestyle{llayout}{ 
+    breaklines = true, 
+    tabsize = 2, 
+    columns = flexible, 
+} 
+\lstdefinestyle{lgeometry}{ 
+    xleftmargin = 20pt, 
+    xrightmargin = 0pt, 
+    frame = tb, 
+    framesep = \fboxsep, 
+    framexleftmargin = 20pt, 
+} 
+\lstdefinestyle{lgeneral}{ 
+    style = lfonts, 
+    style = lnumbers, 
+    style = llayout, 
+    style = lgeometry, 
+} 
+\lstdefinestyle{python}{ 
+    language = {Python}, 
+    style = lgeneral, 
+}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1}}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1}}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Group Project\ \#3}
+\newcommand{\hmwkDueDate}{May 26, 2021}
+\newcommand{\hmwkClass}{Contemporary Topics in Computer Science}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Professor Guangyou Zhou}
+\newcommand{\hmwkAuthorName}{\textbf{Group 1: Biaoze Guo, Jun Wu, Yao Xiao, Ruochen Liu}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 12:00am}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\section{Future trends}
+Artificial intelligence is one of our newest technological children, a tool that has been closely related to our lives in recent years. Its impact on our society is very significant, and it is expected to maintain growth in the coming decades. One of the main faces of artificial intelligence, Andrew Ng, even said that artificial intelligence is the new power. In an interview with Stanford University of Business, he proposed that just like electricity changed almost everything 100 years ago, today, it's actually hard for me to think of an industry that I think AI will not change in the next few years.
+
+But AI is not new. It has existed since John McCarthy \cite{31} coined the term in 1956 and proposed to use AI alone as a research field. Since then, it has been in an era of indifference and continuous interweaving of funds and interests. Today, machine learning and deep learning (DL) monopolize AI. The DL revolution that started in 2012 is not over yet. DL has the crown of AI, but at the same time it needs some changes to keep it going.
+
+\subsection{Get rid of convolutional neural nets}
+CNN-based models have seen extreme popularity in computer vision tasks such as classifying images \cite{32}, detecting objects, or recognizing faces. However, despite their usefulness, Hinton highlights one important drawback in his AAAI 2020 keynote talk, which is that CNNs are not so good at dealing with effects of changing viewpoints such as rotation and scaling.
+
+CNN can handle translation, but the human visual system can also recognize objects in different perspectives, backgrounds or lighting conditions that CNN cannot recognize. When today's top CNN system (with an accuracy of 93\% on the ImageNet benchmark) tries to classify images in a real object dataset, its performance will drop by 40\% to 45\%.
+
+Another problem is what’s called adversarial examples \cite{33}. Hinton emphasizes again the differences between the human visual system and CNNs.
+CNNs are fundamentally different than the human visual system. We simply can’t rely on them due to their unpredictability.
+
+Hinton goes a step further and explains that CNN systems can’t interpret the objects they see in images. We know objects are in the world and we have experience with them. From a very young age, we know about solidity, shape constancy, or object permanence. We can use this knowledge to make sense of bizarre objects but CNNs only see a bunch of pixels. We may need to radically shift the reigning paradigm in computer vision, maybe towards capsule networks \cite{34}
+
+\subsection{Self-supervised deep learning}
+One of the obvious limitations of today's deep learning(DL) is its reliance on large amounts of labeled data and computing power. Yann LeCun, another DL pioneer, said that we need to replace supervised learning with what he calls self-supervised learning (this is the training method of most DL systems).
+
+Instead of training a system with labeled data, the system will learn from raw data to label it. We, humans, learn orders of magnitude faster than supervised (or reinforced) systems. Kids don’t learn to recognize a tree by looking at hundreds of tree pictures. They see one, and then put the label ``tree'' to everything that they intuitively know belongs to the category. We learn in part by observation, which computers can’t do just yet.
+
+Yann LeCun gave an in-depth talk \cite{35} in December 2019 about the topic. He argued that a self-supervised system will be able to predict any part of the input from any other part. For instance, it could predict the future from the past or the masked from the visible. However, although this type of learning works wonders for discrete input, such as text (BERT or GPT-3), it doesn’t work as well for continuous data such as images, audio, or video. For that, he explained, we’ll need latent variable energy-based models which are better suited to deal with the inherent uncertainty of the world.
+
+Self-supervised learning will dethrone supervised learning. There are still some challenges ahead but we’re already building the bridge to close the gap. What’s for sure is that once we’re at the other side, we won’t look back.
+
+\subsection{System to deep learning}
+Yoshua Bengio, who completes the 2018 Turing Award winners trio, gave a talk in 2019 titled From System 1 Deep Learning to System to Deep Learning. He talked about the current state of DL in which the trend is to make everything bigger: bigger datasets, bigger computers, and bigger neural nets. He argued that we won’t get to the next stage in AI by going in this direction.
+
+Bengio takes the two-system framework from Daniel Kahneman’s insights in his landmark book Thinking, Fast and Slow. Kahneman describes system 1 as operating ``automatically and quickly, with little or no effort and no sense of voluntary control,'' whereas system to allocates attention to the effortful mental activities that demand it often associated with the subjective experience of agency, choice, and concentration.
+
+Rob Toews summarizes DL’s current state. Today’s cutting-edge AI systems excel at System 1 tasks but struggle mightily with System 2 tasks.
+Bengio agrees that we humans come up with algorithms, recipes, we can plan, reason, use logic, usually, these things are very slow if you compare to what computers do for some of these problems. These are the things that we want future deep learning to do as well.
+
+Bengio argues that System to DL will be able to generalize to different distributions of data, what’s called out-of-order distribution. Right now, DL systems need to train and test in datasets with the same distribution, which responds to the hypothesis of independently and identically distributed data. We need systems that can handle those changes and do continual learning. System to DL will succeed using non-uniform, real-world data.
+For it, we’ll need systems with better transfer learning \cite{36} capabilities. Bengio suggests that attention mechanisms and meta-learning to learn are basic components of System to cognition. Here’s a quote, often misattributed to Darwin, which outlines the central idea of his famous book On the Origin of Species and emphasizes the importance of learning to adapt in an ever-changing world.
+
+\subsection{Hybrid models}
+Two paradigms have seen unparalleled popularity in AI since its conception: symbolic AI (aka rule-based AI) and DL. Symbolic AI dominated the field from the 50s to the 80s but today most experts oppose this framework. John Haugeland called it GOFAI (Good Old-Fashioned Artificial Intelligence) in his book Artificial Intelligence: The Very Idea \cite{38}.
+
+This is a top-down AI approach. It aims to follow the hypothesis of physical symbol system proposed by Allen Newell and Herbert A. Simon, and make machines intelligent by using high-level symbolic representation of problems. For example, expert systems (the most popular form of symbolic AI) aim to imitate human decisions by following a series of if-then rules.
+The hybrid model is an attempt to combine the advantages of the symbols AI and DL. Martin Ford interviewed AI experts on this method in his book ``Smart Architect''. Andrew Ng emphasized its usefulness in solving problems where we only have a small number of data sets. MIT Professor of Computational Cognitive Science, Josh Tenenbaum, and his team developed a hybrid model that can learn visual concepts, semantic analysis of words and sentences without having to Any one conducts clear supervision.
+
+Gary Marcus, professor of psychology at New York University, argues that common-sense reasoning could be better approached with hybrid models. In a recent paper \cite{40}, Marcus emphasizes his points by alluding to human intelligence.
+
+Despite its promising future, the hybrid approach has important detractors. Geoffrey Hinton criticizes those who intend to spoil DL with symbolic AI, they proposed that they have to admit that deep learning is doing amazing things, and they want to use deep learning as a kind of low-level servant to provide them with what they need to make their symbolic reasoning work. Whether it works or not, hybrid models are something to keep an eye on for the next years.
+
+\subsection{Neuroscience-based deep learning}
+In the decade of 1950, several important scientific breakthroughs lied the groundwork that gave birth to AI. Research in neurology found that the brain is composed of neural networks that “fire in all-or-nothing pulses.” This finding, together with the theoretical descriptions from cybernetics, information theory, and Alan Turing’s theory of computation, hinted at the possibility of creating an artificial brain.
+
+AI had its origins in the human brain, but today’s DL doesn’t work like it. I’ve already subtly mentioned some differences between DL systems and the human brain. CNNs don’t work like our visual system. We observe the world instead of learning from labeled data. We combine bottom-up processing with top-down symbol manipulation. And we carry out system 2 cognition. The final purpose of AI was to build an electronic brain that could simulate ours, an artificial general intelligence (some call it strong AI). Neuroscience can help DL move towards this goal.
+
+One important approach is neuromorphic computing, which refers to hardware that simulates brain structure. As I wrote in a previous article, “there’s a big difference between biological and artificial neural nets: A neuron in the brain carries information in the timing and frequency of spikes whereas the strength (voltage) of the signal is constant. Artificial neurons are the exact opposite. They carry info only in the strength of the input and not in the timing or frequency.” Neuromorphic computing is trying to reduce these differences.
+Another shortcoming of artificial neurons is their simplicity. They’re built assuming that biological neurons are dumb calculators of basic math.” However, this couldn’t be further from the truth. In a study \cite{37} published in Science, a group of German researchers showed that “a single neuron may be able to compute truly complex functions. For example, it might, by itself, be able to recognize an object.
+
+Demis Hassabis, CEO and co-founder of DeepMind, expressed in a paper published in Neuron \cite{39}the importance of using neuroscience to drive AI forward. Apart from some ideas I’ve already discussed, two key aspects stand out: Intuitive physics and planning.
+
+James R. Kubricht and colleagues define intuitive physics as “the knowledge underlying the human ability to understand the physical environment and interact with objects and substances that undergo dynamic state changes, making at least approximate predictions about how observed events will unfold.” DL systems can’t do this. They are not in the world, they aren’t embodied and they lack the evolutionary baggage that gives us the advantage to navigate our surroundings. Josh Tenenbaum is working on instilling this ability in machines.
+Planning can be understood as “an exploration to decide what actions need to be taken to achieve a given goal.” We do this on a daily basis, however, the real world is too complex for machines. DeepMind’s MuZero can play several games at a world-class level by planning, but these games have perfectly defined rules and boundaries.
+
+\subsection{Augmented Analytics}
+Augmented analysis uses AI and ML technology to assist in data preparation, insight generation and interpretation to expand how people can explore and analyze data in analytics and BI platforms. 
+Facts have proved that artificial intelligence is a key enabling technology, and companies need an effective way to expand their artificial intelligence practices and implement artificial intelligence in their businesses. As organizations face pressure to optimize workflows, more and more companies will require BI teams to develop and manage AI/ML models. This motivation to drive new types of BI-based ``AI developers'' will be driven by two key factors: First, compared to hiring dedicated data scientists, making BI teams with AutoML platforms more sustainable and scalable Sex. Second, because BI teams are closer to business use cases than data scientists, the life cycle from "requirements" to working models will be accelerated. More BI vendors will provide AI functions, such as natural language processing, text analysis, and predictive dashboards, and AI + BI will become the new norm.
+
+
+\subsection{Smart manufacturing}
+The Covid-19 crisis saw supply chains getting disrupted, small and medium businesses crushed,  shortages at grocery stores, and online stores running out of stock for essential items. 
+As companies make recovery plans, manufacturers urgently need to be more resilient and transform operations using advanced technologies. Industry 4.0 initiatives will transition from PoCs to production. Diverse data will be analyzed automatically to find hidden patterns and uncover insights. Streaming analytics, aka stream processing, will enable manufacturers to make intelligent decisions with real-time applications such as predicting supply chain disruption or preventing unplanned downtime. Ubiquitous sensors and real-time quality monitoring will significantly reduce product recall as the manufacturing world embraces predictive and prescriptive analytics. The intersection of AI/ML, real-time analytics, and IoT will make manufacturing more efficient, resilient, and agile. 
+
+\subsection{Conclusions}
+Deep learning systems are extremely useful. They’ve single-handedly changed the technological landscape in the last years. However, if we want to create truly intelligent machines, DL will need a qualitative renewal.
+
+Several approaches exist today to achieve this milestone: Get rid of CNNs and their limitations, get rid of labeled data, combine bottom-up with top-down processing, imbue machines with system 2 cognition, and take ideas and advances from neuroscience and the human brain.
+
+\begin{thebibliography}{99}
+    \bibitem{31} Andresen, S.L., 2002. John McCarthy: father of AI. IEEE Intelligent Systems, 17(5), pp.84-85.
+    \bibitem{32} Pham, H., Dai, Z., Xie, Q., Luong, M.T. and Le, Q.V., 2020. Meta pseudo labels. arXiv preprint arXiv:2003.10580.
+    \bibitem{33} Szegedy, C., Zaremba, W., Sutskever, I., Bruna, J., Erhan, D., Goodfellow, I. and Fergus, R., 2013. Intriguing properties of neural networks. arXiv preprint arXiv:1312.6199.
+    \bibitem{34} Sabour, S., Frosst, N. and Hinton, G.E., 2017. Dynamic routing between capsules. arXiv preprint arXiv:1710.09829.
+    \bibitem{35} Zbontar, J., Jing, L., Misra, I., LeCun, Y. and Deny, S., 2021. Barlow twins: Self-supervised learning via redundancy reduction. arXiv preprint arXiv:2103.03230.
+    \bibitem{36} S. J. Pan and Q. Yang, "A Survey on Transfer Learning," in IEEE Transactions on Knowledge and Data Engineering, vol. 22, no. 10, pp. 1345-1359, Oct. 2010, doi: 10.1109/TKDE.2009.191.
+    \bibitem{37} Mihaljević, B., Larrañaga, P. and Bielza, C., 2021. Comparing the electrophysiology and morphology of human and mouse layer 2/3 pyramidal neurons with Bayesian networks. Frontiers in neuroinformatics, 15.
+    \bibitem{38} John Haugeland. 1985. Artificial intelligence: the very idea. Massachusetts Institute of Technology, USA.
+    \bibitem{39} Malawade, A.V., Costa, N.D., Muthirayan, D., Khargonekar, P.P. and Al Faruque, M.A., 2021. Neuroscience-inspired algorithms for the predictive maintenance of manufacturing systems. IEEE Transactions on Industrial Informatics.
+    \bibitem{40} Marcus, G., 2020. The next decade in AI: four steps towards robust artificial intelligence. arXiv preprint arXiv:2002.06177.
+
+\end{thebibliography}
+
+\end{document}

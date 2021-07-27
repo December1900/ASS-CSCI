@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{float}
+\lstset{ %
+language=python,                % the language of the code
+basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                % will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,                   % adds a frame around the code
+rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+tabsize=2,                      % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                % also try caption instead of title
+keywordstyle=\color{blue},          % keyword style
+commentstyle=\color{dkgreen},       % comment style
+stringstyle=\color{mauve},         % string literal style
+escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+morekeywords={*,...}               % if you want to add more keywords to the set
+}
+% Margins
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=4.0cm]{geometry}
+% Colour table cells
+\usepackage[table]{xcolor}
+
+% Get larger line spacing in table
+\newcommand{\tablespace}{\\[1.25mm]}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+%%%%%%%%%%%%%%%%%
+%     Title     %
+%%%%%%%%%%%%%%%%%
+\title{CSCI803 Assignment}
+\author{Yao Xiao \\ SID 2019180015}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%
+%   Problem 1   %
+%%%%%%%%%%%%%%%%%
+\section{Problem 1}
+\subsection{Question A}
+We can choose counting sort which runs in O(n) time and it is a stable sorting algorithm. 
+
+\subsection{Question B}
+We can execute Quicksort-Partition one pass around around the pivot (x=0).
+If it is a Lomuto partition, it will place all 0 elements on the left and all 1 elements on the right.
+This will also sort the array.
+After that, it is in place and has a O(n) running time.
+
+Here is the pseudocode:
+\begin{lstlisting}
+i = 0
+for j = 1 to n
+if A[j] <= 0
+then i = i + 1
+swap(A[i], A[j])
+\end{lstlisting}
+
+\subsection{Question C}
+We can choose insertion sort which is an in place sorting algorithm and is also stable.
+We can consider the situation ($A[i] = A[j]$ and $i < j$).
+Since i < j, the priority $A[i]$  will be added to the sorted array $A[1\cdots i-1]$ by moving in the correct position.
+
+
+\section{Problem 2}
+
+\end{document}

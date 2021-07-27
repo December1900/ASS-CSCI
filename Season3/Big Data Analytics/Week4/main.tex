@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{float}
+
+% Margins
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=4.0cm]{geometry}
+% Colour table cells
+\usepackage[table]{xcolor}
+
+% Get larger line spacing in table
+\newcommand{\tablespace}{\\[1.25mm]}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+%%%%%%%%%%%%%%%%%
+%     Title     %
+%%%%%%%%%%%%%%%%%
+\title{CSCI946 Assignment}
+\author{Yao Xiao \\ SID 2019180015}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%
+%   Problem 1   %
+%%%%%%%%%%%%%%%%%
+\section{Phase 1: Discovery}
+\begin{enumerate}
+    \item Identify data source.
+    \item Confirm team members and roles.
+    \item Check project sponsor's approach.
+\end{enumerate}
+
+\subsection{About Data}
+The data for the project should be classified into two categories:
+\begin{enumerate}
+    \item Five years of ideas submitted by internal innovation competitions.
+    \item Notes and records representing innovation and research activities from all over the world.
+\end{enumerate}
+
+\subsection{Hypotheses}
+The hypotheses for the project should be grouped into two categories:
+\begin{enumerate}
+    \item Descriptive analysis of what is happening to further stimulate related creativity and collaboration.
+    \item Predictive analysis can provide relevant administrative staff with future investment recommendations, such as how much to invest at what time, etc.
+\end{enumerate}
+
+\section{Phase 2: Data Preparation}
+\begin{enumerate}
+    \item IT department set up an analytics sandbox
+    \item Discovered that certain data needed conditioning and normalization and that missing datasets were critical.
+    \item Many names were misspelled and problems with extra spaces.
+\end{enumerate}
+
+\section{Phase 3: Model Planning}
+\begin{enumerate}
+    \item Use social network analysis techniques to look for innovators.
+    \item Identify the right milestones to achieve the goals.
+    \item Trace how people move ideas from each milesonte toward the goal.
+    \item Tract ideas that die and others that reach the goal.
+    \item Compare times and outcomes using a few different methods.
+\end{enumerate}
+
+\section{Phase 4: Model Building}
+\begin{enumerate}
+    \item NLP on textual descriptions.
+    \item Conduct social network analysis using R and Rstudio.
+    \item Developed social graphs and visualizations.
+    \item Verify some of the inital hypotheses.
+\end{enumerate}
+
+\section{Phase 5: Communicate Results}
+\begin{enumerate}
+    \item Study was successful in in identifying hidden innovators.
+    \item CTO launched longitudinal studies to track innovation results.
+    \item This project promoted knowledge sharing related to innovation and research.
+    \item Also enable the organisation to cultivate additional IP.
+    \item Communicate one of the key findings.
+\end{enumerate}
+
+\section{Phase 6: Operationalize}
+\begin{enumerate}
+    \item Deployment was not really discussed.
+    \item Key findings:
+    \begin{itemize}
+        \item Need more data in future.
+        \item Some data were sensitive.
+        \item A parallel initiative needs to be created to improve basic BI activities.
+        \item A mechanism is needed to continually reevaluate the model after deployment.
+        \item Informed new investment decisions.s
+    \end{itemize}
+\end{enumerate}
+
+
+\end{document}
